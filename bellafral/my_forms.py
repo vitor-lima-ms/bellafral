@@ -1,6 +1,6 @@
 from django import forms
 from bellafral.models import Bellafral
-from stock.models import Stock
+from costs.models import Costs
 
 class BellafralForm(forms.ModelForm):
     class Meta:
@@ -9,4 +9,4 @@ class BellafralForm(forms.ModelForm):
 
 class BellafralSimulatorForm(forms.Form):
     fralda = forms.ModelChoiceField(queryset=Bellafral.objects.all())
-    stock = forms.ModelChoiceField(queryset=Stock.objects.all())
+    costs = forms.ModelChoiceField(queryset=Costs.objects.all())
