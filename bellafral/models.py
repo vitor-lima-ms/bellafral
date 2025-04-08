@@ -1,6 +1,12 @@
 from django.db import models
-
+from costs.models import Costs
 # Create your models here.
+
+modelos = (
+    ('Bellafral', 'Bellafral'),
+    ('Big Confort', 'Big Confort'),
+    ('Basic Mille', 'Basic Mille'),
+)
 
 tamanhos = (
     ('XG', 'XG'),
@@ -9,7 +15,8 @@ tamanhos = (
 )
 
 class Bellafral(models.Model):
-    nome = models.CharField(max_length=100)
+    modelo = models.CharField(max_length=100, choices=modelos, default='Bellafral')
+    identificador = models.CharField(max_length=100)
     tamanho = models.CharField(max_length=2, choices=tamanhos)
     celulose_virgem = models.DecimalField(verbose_name='Celulose virgem (Kg)', max_digits=10, decimal_places=4, default=0)
     gel = models.DecimalField(verbose_name='Gel (Kg)', max_digits=10, decimal_places=4, default=0)
@@ -21,9 +28,14 @@ class Bellafral(models.Model):
     hot_melt_const = models.DecimalField(verbose_name='Hot-Melt Construção (Kg)', max_digits=10, decimal_places=4, default=0)
 
     def __str__(self):
-        return (f'{self.nome} ({self.tamanho})')
+        return (f'{self.modelo} {self.identificador} ({self.tamanho})')
 
 class Simulations(models.Model):
     fralda = models.JSONField(default=dict)
-    stock = models.JSONField(default=dict)
+    fralda_object = models.ForeignKey(Bellafral, on_delete=models.CASCADE, null=True, blank=True, default=None)
+    costs = models.JSONField(default=dict)
+    costs_object = models.ForeignKey(Costs, on_delete=models.CASCADE, null=True, blank=True, default=None)
     simulation = models.JSONField(default=dict)
+
+    def __str__(self):
+        return (f'Fralda: {self.fralda_object} - Custo: {self.costs_object}')
