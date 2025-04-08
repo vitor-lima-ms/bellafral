@@ -1,7 +1,7 @@
 {% extends "index.html" %}
 
 {% block content %}
-    <h2>Simulação - {{ fralda }} - {{ stock }}</h2>
+    <h2>Simulação - Fralda: {{ fralda }} - Custo: {{ costs }}</h2>
     <a href="{% url 'bellafral:download_simulation' %}">Download .csv</a>
     <table>
         <thead>
@@ -16,54 +16,54 @@
             <tr>
                 <td> Celulose virgem (Kg)</td>
                 <td>{{ fralda.celulose_virgem }}</td>
-                <td>{{ stock.celulose_virgem_price }}</td>
-                <td>{{ costs.celulose_virgem }}</td>
+                <td>{{ costs.celulose_virgem_price }}</td>
+                <td>{{ total_cost.celulose_virgem }}</td>
             </tr>
             <tr>
                 <td>Gel (Kg)</td>
                 <td>{{ fralda.gel }}</td>
-                <td>{{ stock.gel_price }}</td>
-                <td>{{ costs.gel }}</td>
+                <td>{{ costs.gel_price }}</td>
+                <td>{{ total_cost.gel }}</td>
             </tr>
             <tr>
                 <td>TNT - Filtrante - 780mm (m2)</td>
                 <td>{{ fralda.tnt_filtrante_780 }}</td>
-                <td>{{ stock.tnt_filtrante_780_price }}</td>
-                <td>{{ costs.tnt_filtrante_780 }}</td>
+                <td>{{ costs.tnt_filtrante_780_price }}</td>
+                <td>{{ total_cost.tnt_filtrante_780 }}</td>
             </tr>
             <tr>
                 <td>Fita adesiva - Tape (Kg)</td>
                 <td>{{ fralda.fita_adesiva_tape }}</td>
-                <td>{{ stock.fita_adesiva_tape_price }}</td>
-                <td>{{ costs.fita_adesiva_tape }}</td>
+                <td>{{ costs.fita_adesiva_tape_price }}</td>
+                <td>{{ total_cost.fita_adesiva_tape }}</td>
             </tr>
             <tr>
                 <td>Elástico - Elastano - Lycra (Kg)</td>
                 <td>{{ fralda.elastico_elastano_lycra }}</td>
-                <td>{{ stock.elastico_elastano_lycra_price }}</td>
-                <td>{{ costs.elastico_elastano_lycra }}</td>
+                <td>{{ costs.elastico_elastano_lycra_price }}</td>
+                <td>{{ total_cost.elastico_elastano_lycra }}</td>
             </tr>
             <tr>
                 <td>Barreira (m2)</td>
                 <td>{{ fralda.barreira }}</td>
-                <td>{{ stock.barreira_price }}</td>
-                <td>{{ costs.barreira }}</td>
+                <td>{{ costs.barreira_price }}</td>
+                <td>{{ total_cost.barreira }}</td>
             </tr>
             <tr>
                 <td>Polietileno - Filme - 780mm (Kg)</td>
                 <td>{{ fralda.polietileno_filme_780 }}</td>
-                <td>{{ stock.polietileno_filme_780_price }}</td>
-                <td>{{ costs.polietileno_filme_780 }}</td>
+                <td>{{ costs.polietileno_filme_780_price }}</td>
+                <td>{{ total_cost.polietileno_filme_780 }}</td>
             </tr>
             <tr>
                 <td>Hot-Melt Construção (Kg)</td>
                 <td>{{ fralda.hot_melt_const }}</td>
-                <td>{{ stock.hot_melt_const_price }}</td>
-                <td>{{ costs.hot_melt_const }}</td>
+                <td>{{ costs.hot_melt_const_price }}</td>
+                <td>{{ total_cost.hot_melt_const }}</td>
             </tr>
             <tr>
                 <td colspan="3"><b>Custo total (R$)</b></td>
-                <td>{{ costs.total_cost }}</td>
+                <td>{{ total_cost.total_cost }}</td>
             </tr>
         </tbody>
     </table>
