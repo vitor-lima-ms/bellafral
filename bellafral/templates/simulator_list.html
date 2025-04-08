@@ -1,0 +1,13 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    {% if messages %}
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+    {% endif %}
+    {% for simulation in simulations %}
+        <td><a href="{% url "bellafral:simulator_details" simulation.id %}">{{ simulation }}</a></td>
+    {% endfor %}
+{% endblock content %}
+
