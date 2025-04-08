@@ -6,6 +6,7 @@ from costs.models import Costs
 @admin.register(Costs)
 class CostsAdmin(admin.ModelAdmin):
     list_display = (
+        'identificador',
         'celulose_virgem_price',
         'gel_price',
         'tnt_filtrante_780_price',
