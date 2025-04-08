@@ -4,7 +4,7 @@
     <table>
         <thead>
             <tr>
-                <th>Nome</th>
+                <th>Identificador</th>
                 <th>Tamanho</th>
                 <th>Celulose virgem (Kg)</th>
                 <th>Gel (Kg)</th>
@@ -18,7 +18,7 @@
         </thead>
         <tbody>
             <tr>
-                <td>{{ fralda.nome }}</td>
+                <td>{{ fralda }}</td>
                 <td>{{ fralda.tamanho }}</td>
                 <td>{{ fralda.celulose_virgem }}</td>
                 <td>{{ fralda.gel }}</td>
@@ -31,5 +31,9 @@
             </tr>
         </tbody>
     </table>
+    <form action="{% url 'bellafral:bellafral_delete' fralda.id %}" method="post">
+        {% csrf_token %}
+        <button type="submit">Deletar</button>
+    </form>
 {% endblock content %}
 
