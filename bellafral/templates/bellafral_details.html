@@ -1,0 +1,35 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    <table>
+        <thead>
+            <tr>
+                <th>Nome</th>
+                <th>Tamanho</th>
+                <th>Celulose virgem (Kg)</th>
+                <th>Gel (Kg)</th>
+                <th>TNT - Filtrante - 780mm (m2)</th>
+                <th>Fita adesiva - Tape (Kg)</th>
+                <th>Elástico - Elastano - Lycra (Kg)</th>
+                <th>Barreira (m2)</th>
+                <th>Polietileno - Filme - 780mm (Kg)</th>
+                <th>Hot-Melt Construção (Kg)</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>{{ fralda.nome }}</td>
+                <td>{{ fralda.tamanho }}</td>
+                <td>{{ fralda.celulose_virgem }}</td>
+                <td>{{ fralda.gel }}</td>
+                <td>{{ fralda.tnt_filtrante_780 }}</td>
+                <td>{{ fralda.fita_adesiva_tape }}</td>
+                <td>{{ fralda.elastico_elastano_lycra }}</td>  
+                <td>{{ fralda.barreira }}</td>
+                <td>{{ fralda.polietileno_filme_780 }}</td>
+                <td>{{ fralda.hot_melt_const }}</td>
+            </tr>
+        </tbody>
+    </table>
+{% endblock content %}
+

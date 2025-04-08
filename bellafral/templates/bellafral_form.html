@@ -1,0 +1,15 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    <h2>Bellafral</h2>
+    {% if messages %}
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+    {% endif %}
+    <form action="{% url 'bellafral:bellafral_form' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Salvar</button>
+    </form> 
+{% endblock content %}

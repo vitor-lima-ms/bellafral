@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Bellafral</title>
+</head>
+<body>
+    <header>
+        <h1><a href="{% url "core:index" %}">Bellafral - Sistema de Gerenciamento de Custos</a></h1>
+    </header>
+    <nav>
+        <ul>
+            <li><a href="{% url 'stock:stock_form' %}">Selecionar custos</a></li>
+        </ul>
+        <ul>
+            <li><a href="{% url 'bellafral:bellafral_form' %}">Criar Bellafral</a></li>
+            <li><a href="{% url 'bellafral:bellafral_list' %}">Listar Bellafral</a></li>
+            <li><a href="{% url 'bellafral:bellafral_pre_simulator' %}">Simular Bellafral</a></li>
+        </ul>   
+    </nav>
+    {% block content %}
+        {% if messages %}
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+        {% endif %}
+    {% endblock content %}
+</body>
+</html>

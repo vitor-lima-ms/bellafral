@@ -1,0 +1,10 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    <form action="{% url 'bellafral:bellafral_simulator' %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Simular</button>
+    </form>
+{% endblock content %}
+

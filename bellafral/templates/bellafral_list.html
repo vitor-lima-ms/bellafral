@@ -1,0 +1,13 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    {% if messages %}
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+    {% endif %}
+    {% for fralda in bellafral %}
+        <td><a href="{% url "bellafral:bellafral_details" fralda.id %}">{{ fralda }}</a></td>
+    {% endfor %}
+{% endblock content %}
+
