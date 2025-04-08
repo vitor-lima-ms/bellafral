@@ -12,12 +12,15 @@
     </header>
     <nav>
         <ul>
-            <li><a href="{% url 'stock:stock_form' %}">Selecionar custos</a></li>
+            <li><a href="{% url 'costs:costs_form' %}">Selecionar custos</a></li>
         </ul>
         <ul>
-            <li><a href="{% url 'bellafral:bellafral_form' %}">Criar Bellafral</a></li>
-            <li><a href="{% url 'bellafral:bellafral_list' %}">Listar Bellafral</a></li>
-            <li><a href="{% url 'bellafral:bellafral_pre_simulator' %}">Simular Bellafral</a></li>
+            <li><a href="{% url 'bellafral:bellafral_form' %}">Criar fralda</a></li>
+            <li><a href="{% url 'bellafral:bellafral_list' %}">Listar fraldas</a></li>
+            
+        </ul>
+        <ul>
+            <li><a href="{% url 'bellafral:bellafral_pre_simulator' %}">Simular</a></li>
         </ul>   
     </nav>
     {% block content %}
