@@ -8,11 +8,12 @@
 </head>
 <body>
     <header>
-        <h1><a href="{% url "core:index" %}">Bellafral - Sistema de Gerenciamento de Custos</a></h1>
+        <h1><a href="{% url "core:index" %}">Bellafral - Sistema de Simulação de Custos</a></h1>
     </header>
     <nav>
         <ul>
-            <li><a href="{% url 'costs:costs_form' %}">Selecionar custos</a></li>
+            <li><a href="{% url 'costs:costs_form' %}">Criar custos</a></li>
+            <li><a href="{% url 'costs:costs_list' %}">Listar custos</a></li>
         </ul>
         <ul>
             <li><a href="{% url 'bellafral:bellafral_form' %}">Criar fralda</a></li>
@@ -21,6 +22,7 @@
         </ul>
         <ul>
             <li><a href="{% url 'bellafral:bellafral_pre_simulator' %}">Simular</a></li>
+            <li><a href="{% url 'bellafral:simulator_list' %}">Listar simulações</a></li>
         </ul>   
     </nav>
     {% block content %}
