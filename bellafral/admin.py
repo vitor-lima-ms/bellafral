@@ -6,7 +6,8 @@ from bellafral.models import Bellafral, Simulations
 @admin.register(Bellafral)
 class BellafralAdmin(admin.ModelAdmin):
     list_display = (
-        'nome',
+        'modelo',
+        'identificador',
         'tamanho',
         'celulose_virgem',
         'gel',
