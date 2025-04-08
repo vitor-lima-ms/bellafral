@@ -1,0 +1,13 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    {% if messages %}
+        {% for message in messages %}
+            {{ message }}
+        {% endfor %}
+    {% endif %}
+    {% for cost in costs %}
+        <td><a href="{% url 'costs:costs_details' cost.id %}">{{ cost }}</a></td>
+    {% endfor %}
+{% endblock content %}
+
