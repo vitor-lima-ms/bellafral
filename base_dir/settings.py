@@ -38,10 +38,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'bellafral',
-    'big_confort',
-    'basic_mille',
-    'core',
-    'stock',
+    'costs',
     'import_export',
 ]
 
