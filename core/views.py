@@ -28,4 +28,4 @@ def index(request):
         return render(request, 'index.html', {'simulations': simulations_list})
     
     except:
-        return render(request, 'index.html', {'simulations': [], 'total_cost': 0})
+        return render(request, 'index.html', {'simulations': []})

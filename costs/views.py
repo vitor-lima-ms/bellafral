@@ -25,6 +25,13 @@ def costs_form(request):
     if request.method == 'POST':
         form = CostsForm(request.POST)
         if form.is_valid():
+            for value in form.cleaned_data.values():
+                if type(value) == str or value == None:
+                    continue
+                elif value < 0:
+                    messages.error(request, 'Valores não podem ser negativos')
+                    return redirect('costs:costs_form')
+            
             form.save()
             messages.success(request, 'Custos criados com sucesso')
             return redirect('costs:costs_list')

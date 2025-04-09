@@ -1,3 +1,11 @@
+
+#success_message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1em;
+}
+
 #bellafral_list_header {
     display: flex;
     justify-content: center;

@@ -19,7 +19,7 @@ def bellafral_form(request):
                     return redirect('bellafral:bellafral_form')
 
             form.save()
-            messages.success(request, 'Bellafral criada com sucesso')
+            messages.success(request, 'Fralda criada com sucesso')
             return redirect('bellafral:bellafral_list')
     else:
         form = BellafralForm()

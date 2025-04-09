@@ -57,11 +57,6 @@
         </div>
     </nav>
     {% block content %}
-        {% if messages %}
-            {% for message in messages %}
-                {{ message }}
-            {% endfor %}
-        {% endif %}
         {% for simulation in simulations %}
             <section id="simulation_header">
                 <h4>{{ simulation.fralda_object }}</h4>

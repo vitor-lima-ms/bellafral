@@ -8,7 +8,11 @@
 {% block content %}
     {% if messages %}
         {% for message in messages %}
-            {{ message }}
+            <section id="success_message">
+                <div class="alert alert-success" role="alert">
+                    {{ message }}
+                </div>
+            </section>
         {% endfor %}
     {% endif %}
     <section id="costs_list_header">
