@@ -63,160 +63,160 @@
         </div>
     </nav>
     {% block content %}
-    <section id="success_message">
-        {% if messages %}
-            {% for message in messages %}
-                <section id="success_message">
-                    <div class="alert alert-light" role="alert">
-                        {{ message }}
-                    </div>
+        <section id="success_message">
+            {% if messages %}
+                {% for message in messages %}
+                    <section id="success_message">
+                        <div class="alert alert-light" role="alert">
+                            {{ message }}
+                        </div>
+                    </section>
+                {% endfor %}
+            {% endif %}
+        </section>
+        <section id="simulations_list">
+            {% if simulations|length == 0 %}
+                <section id="simulations_list_empty">
+                    <h4><b>Nenhuma simulação encontrada!</b></h4>
                 </section>
-            {% endfor %}
-        {% endif %}
-    </section>
-    <section id="simulations_list">
-        {% if simulations|length == 0 %}
-            <section id="simulations_list_empty">
-                <h4><b>Nenhuma simulação encontrada!</b></h4>
-            </section>
-        {% else %}
-            {% for simulation in simulations %}
-                <section id="simulation_header">
-                    <h4>{{ simulation.fralda_object }}</h4>
-            </section>
-            <section id="simulation_details_table">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Item</th>
-                            <th>Quantidade</th>
-                            <th>Custo unitário</th>
-                            <th>Custo total</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td> Celulose virgem (Kg)</td>
-                            <td>{{ simulation.fralda_object.celulose_virgem }}</td>
-                            <td>R$ {{ simulation.costs_object.celulose_virgem_price }}</td>
-                            <td>R$ {{ simulation.fralda_object.celulose_virgem_total_unit_cost }}</td>
-                        </tr>
-                        <tr>
-                            <td>Gel (Kg)</td>
-                            <td>{{ simulation.fralda_object.gel }}</td>
-                            <td>R$ {{ simulation.costs_object.gel_price }}</td>
-                            <td>R$ {{ simulation.fralda_object.gel_total_unit_cost }}</td>
-                        </tr>
-                        <tr>
-                            <td>TNT - Filtrante - 780mm (m2)</td>
-                            <td>{{ simulation.fralda_object.tnt_filtrante_780 }}</td>
-                            <td>R$ {{ simulation.costs_object.tnt_filtrante_780_price }}</td>
-                            <td>R$ {{ simulation.fralda_object.tnt_filtrante_780_total_unit_cost }}</td>
-                        </tr>
-                        <tr>
-                            <td>Fita adesiva - Tape (Kg)</td>
-                            <td>{{ simulation.fralda_object.fita_adesiva_tape }}</td>
-                            <td>R$ {{ simulation.costs_object.fita_adesiva_tape_price }}</td>
-                            <td>R$ {{ simulation.fralda_object.fita_adesiva_tape_total_unit_cost }}</td>
-                        </tr>
-                        <tr>
-                            <td>Elástico - Elastano - Lycra (Kg)</td>
-                            <td>{{ simulation.fralda_object.elastico_elastano_lycra }}</td>
-                            <td>R$ {{ simulation.costs_object.elastico_elastano_lycra_price }}</td>
-                            <td>R$ {{ simulation.fralda_object.elastico_elastano_lycra_total_unit_cost }}</td>
-                        </tr>
-                        <tr>
-                            <td>Barreira (m2)</td>
-                            <td>{{ simulation.fralda_object.barreira }}</td>
-                            <td>R$ {{ simulation.costs_object.barreira_price }}</td>
-                            <td>R$ {{ simulation.fralda_object.barreira_total_unit_cost }}</td>
-                        </tr>
-                        <tr>
-                            <td>Polietileno - Filme - 780mm (Kg)</td>
-                            <td>{{ simulation.fralda_object.polietileno_filme_780 }}</td>
-                            <td>R$ {{ simulation.costs_object.polietileno_filme_780_price }}</td>
-                            <td>R$ {{ simulation.fralda_object.polietileno_filme_780_total_unit_cost }}</td>
-                        </tr>
-                        <tr>
-                            <td>Hot-Melt Construção (Kg)</td>
-                            <td>{{ simulation.fralda_object.hot_melt_const }}</td>
-                            <td>R$ {{ simulation.costs_object.hot_melt_const_price }}</td>
-                            <td>R$ {{ simulation.fralda_object.hot_melt_const_total_unit_cost }}</td>
-                        </tr>
-                        <tr>
-                            <td colspan="3"><b>Custo total (R$)</b></td>
-                            <td>{{ simulation.fralda_object.total_cost }}</td>
-                        </tr>
-                        <tr>
-                            <td colspan="3"><b>Quantidade de peças por pacote</b></td>
-                            <td>{{ simulation.fralda_object.qtd_p_pacote }}</td>
-                        </tr>
-                        <tr>
-                            <td colspan="3"><b>Embalagem (R$)</b></td>
-                            <td>{{ simulation.fralda_object.embalagem }}</td>
-                        </tr>
-                        <tr>
-                            <td colspan="3"><b>Saco para fardos (R$)</b></td>
-                            <td>{{ simulation.fralda_object.saco_fardos }}</td>
-                        </tr>
-                        <tr>
-                            <td colspan="3"><b>Custo do pacote (R$)</b></td>
-                            <td>{{ simulation.fralda_object.custo_pacote }}</td>
-                        </tr>
-                        <tr>
-                            <td colspan="3"><b>Custo unitário final (R$)</b></td>
-                            <td>{{ simulation.fralda_object.custo_unitario_final }}</td>
-                        </tr>
-                        <tr>
-                            <td colspan="3"><b>Comissão (%)</b></td>
-                            <td>{{ simulation.fralda_object.comissao }}</td>
-                        </tr>
-                        <tr>
-                            <td colspan="3"><b>Impostos (%)</b></td>
-                            <td>{{ simulation.fralda_object.impostos }}</td>
-                        </tr>
-                        <tr>
-                            <td colspan="3"><b>Frete (%)</b></td>
-                            <td>{{ simulation.fralda_object.frete }}</td>
-                        </tr>
-                        <tr>
-                            <td colspan="3"><b>Margem de contribuição (%)</b></td>
-                            <td>{{ simulation.fralda_object.margem_contribuicao }}</td>
-                        </tr>
-                        <tr>
-                            <td colspan="3"><b>ST (%)</b></td>
-                            <td>{{ simulation.fralda_object.st }}</td>
-                        </tr>
-                        <tr>
-                            <td colspan="3"><b>Preço de venda (R$)</b></td>
-                            <td>{{ simulation.fralda_object.preco_venda }}</td>
-                        </tr>
-                        <tr>
-                            <td colspan="3"><b>Preço de venda unitário (R$)</b></td>
-                            <td>{{ simulation.fralda_object.preco_venda_unitario }}</td>
-                        </tr>
-                        <tr>
-                            <td colspan="3"><b>Preço de venda com ST (R$)</b></td>
-                            <td>{{ simulation.fralda_object.preco_venda_st }}</td>
-                        </tr>
-                        <tr>
-                            <td colspan="3"><b>Preço de venda unitário com ST (R$)</b></td>
-                            <td>{{ simulation.fralda_object.preco_venda_st_unitario }}</td>
-                        </tr>
-                        <tr>
-                            <td colspan="4">
-                                <form action="{% url 'bellafral:simulator_delete' simulation.id %}" method="post">
-                                    {% csrf_token %}
-                                    <button type="submit">Deletar</button>
-                                </form>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-                </section>
-            {% endfor %}
-        {% endif %}
-    </section>
+            {% else %}
+                {% for simulation in simulations %}
+                    <section id="simulation_header">
+                        <h4>{{ simulation.fralda_object }}</h4>
+                    </section>
+                    <section id="simulation_details_table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Item</th>
+                                    <th>Quantidade</th>
+                                    <th>Custo unitário</th>
+                                    <th>Custo total</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td> Celulose virgem (Kg)</td>
+                                    <td>{{ simulation.fralda_object.celulose_virgem }}</td>
+                                    <td>R$ {{ simulation.costs_object.celulose_virgem_price }}</td>
+                                    <td>R$ {{ simulation.fralda_object.celulose_virgem_total_unit_cost }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Gel (Kg)</td>
+                                    <td>{{ simulation.fralda_object.gel }}</td>
+                                    <td>R$ {{ simulation.costs_object.gel_price }}</td>
+                                    <td>R$ {{ simulation.fralda_object.gel_total_unit_cost }}</td>
+                                </tr>
+                                <tr>
+                                    <td>TNT - Filtrante - 780mm (m2)</td>
+                                    <td>{{ simulation.fralda_object.tnt_filtrante_780 }}</td>
+                                    <td>R$ {{ simulation.costs_object.tnt_filtrante_780_price }}</td>
+                                    <td>R$ {{ simulation.fralda_object.tnt_filtrante_780_total_unit_cost }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Fita adesiva - Tape (Kg)</td>
+                                    <td>{{ simulation.fralda_object.fita_adesiva_tape }}</td>
+                                    <td>R$ {{ simulation.costs_object.fita_adesiva_tape_price }}</td>
+                                    <td>R$ {{ simulation.fralda_object.fita_adesiva_tape_total_unit_cost }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Elástico - Elastano - Lycra (Kg)</td>
+                                    <td>{{ simulation.fralda_object.elastico_elastano_lycra }}</td>
+                                    <td>R$ {{ simulation.costs_object.elastico_elastano_lycra_price }}</td>
+                                    <td>R$ {{ simulation.fralda_object.elastico_elastano_lycra_total_unit_cost }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Barreira (m2)</td>
+                                    <td>{{ simulation.fralda_object.barreira }}</td>
+                                    <td>R$ {{ simulation.costs_object.barreira_price }}</td>
+                                    <td>R$ {{ simulation.fralda_object.barreira_total_unit_cost }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Polietileno - Filme - 780mm (Kg)</td>
+                                    <td>{{ simulation.fralda_object.polietileno_filme_780 }}</td>
+                                    <td>R$ {{ simulation.costs_object.polietileno_filme_780_price }}</td>
+                                    <td>R$ {{ simulation.fralda_object.polietileno_filme_780_total_unit_cost }}</td>
+                                </tr>
+                                <tr>
+                                    <td>Hot-Melt Construção (Kg)</td>
+                                    <td>{{ simulation.fralda_object.hot_melt_const }}</td>
+                                    <td>R$ {{ simulation.costs_object.hot_melt_const_price }}</td>
+                                    <td>R$ {{ simulation.fralda_object.hot_melt_const_total_unit_cost }}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3"><b>Custo total (R$)</b></td>
+                                    <td>{{ simulation.fralda_object.total_cost }}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3"><b>Quantidade de peças por pacote</b></td>
+                                    <td>{{ simulation.fralda_object.qtd_p_pacote }}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3"><b>Embalagem (R$)</b></td>
+                                    <td>{{ simulation.fralda_object.embalagem }}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3"><b>Saco para fardos (R$)</b></td>
+                                    <td>{{ simulation.fralda_object.saco_fardos }}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3"><b>Custo do pacote (R$)</b></td>
+                                    <td>{{ simulation.fralda_object.custo_pacote }}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3"><b>Custo unitário final (R$)</b></td>
+                                    <td>{{ simulation.fralda_object.custo_unitario_final }}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3"><b>Comissão (%)</b></td>
+                                    <td>{{ simulation.fralda_object.comissao }}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3"><b>Impostos (%)</b></td>
+                                    <td>{{ simulation.fralda_object.impostos }}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3"><b>Frete (%)</b></td>
+                                    <td>{{ simulation.fralda_object.frete }}</td>
+                                </tr>
+                                <tr>
+                                    <td class="margem_contribuicao" colspan="3"><b>Margem de contribuição (%)</b></td>
+                                    <td class="margem_contribuicao">{{ simulation.fralda_object.margem_contribuicao }}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3"><b>ST (%)</b></td>
+                                    <td>{{ simulation.fralda_object.st }}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3"><b>Preço de venda (R$)</b></td>
+                                    <td>{{ simulation.fralda_object.preco_venda }}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3"><b>Preço de venda unitário (R$)</b></td>
+                                    <td>{{ simulation.fralda_object.preco_venda_unitario }}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3"><b>Preço de venda com ST (R$)</b></td>
+                                    <td>{{ simulation.fralda_object.preco_venda_st }}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3"><b>Preço de venda unitário com ST (R$)</b></td>
+                                    <td>{{ simulation.fralda_object.preco_venda_st_unitario }}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="4">
+                                        <form action="{% url 'bellafral:simulator_delete' simulation.id %}" method="post">
+                                            {% csrf_token %}
+                                            <button type="submit">Deletar</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </section>
+                {% endfor %}
+            {% endif %}
+        </section>
     {% endblock content %}
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
 </body>

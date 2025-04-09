@@ -71,27 +71,27 @@ def bellafral_simulator(request):
         fralda_object=fralda,
         costs_object=costs,
         )
+    
+    simulation.fralda_object.celulose_virgem_total_unit_cost = round(simulation.fralda_object.celulose_virgem * simulation.costs_object.celulose_virgem_price, 4)
+    simulation.fralda_object.gel_total_unit_cost = round(simulation.fralda_object.gel * simulation.costs_object.gel_price, 4)
+    simulation.fralda_object.tnt_filtrante_780_total_unit_cost = round(simulation.fralda_object.tnt_filtrante_780 * simulation.costs_object.tnt_filtrante_780_price, 4)
+    simulation.fralda_object.fita_adesiva_tape_total_unit_cost = round(simulation.fralda_object.fita_adesiva_tape * simulation.costs_object.fita_adesiva_tape_price, 4)
+    simulation.fralda_object.elastico_elastano_lycra_total_unit_cost = round(simulation.fralda_object.elastico_elastano_lycra * simulation.costs_object.elastico_elastano_lycra_price, 4)
+    simulation.fralda_object.barreira_total_unit_cost = round(simulation.fralda_object.barreira * simulation.costs_object.barreira_price, 4)
+    simulation.fralda_object.polietileno_filme_780_total_unit_cost = round(simulation.fralda_object.polietileno_filme_780 * simulation.costs_object.polietileno_filme_780_price, 4)
+    simulation.fralda_object.hot_melt_const_total_unit_cost = round(simulation.fralda_object.hot_melt_const * simulation.costs_object.hot_melt_const_price, 4)
+
+    simulation.fralda_object.custo_pacote = round((total_cost * simulation.fralda_object.qtd_p_pacote) + simulation.fralda_object.embalagem + simulation.fralda_object.saco_fardos, 4)
+    simulation.fralda_object.custo_unitario_final = round(simulation.fralda_object.custo_pacote / simulation.fralda_object.qtd_p_pacote, 4)
+
+    simulation.fralda_object.preco_venda = round((simulation.fralda_object.custo_pacote) / (1 - (simulation.fralda_object.comissao + simulation.fralda_object.impostos + simulation.fralda_object.frete + simulation.fralda_object.margem_contribuicao + simulation.fralda_object.st) / 100), 4)
+    simulation.fralda_object.preco_venda_unitario = round(simulation.fralda_object.preco_venda / simulation.fralda_object.qtd_p_pacote, 4)
+
+    simulation.fralda_object.preco_venda_st = round(simulation.fralda_object.preco_venda * (1 + simulation.fralda_object.st / 100), 4)
+    simulation.fralda_object.preco_venda_st_unitario = round(simulation.fralda_object.preco_venda_st / simulation.fralda_object.qtd_p_pacote, 4)
+
     simulation.save()
 
-    fralda.celulose_virgem_total_unit_cost = round(fralda.celulose_virgem * costs.celulose_virgem_price, 4)
-    fralda.gel_total_unit_cost = round(fralda.gel * costs.gel_price, 4)
-    fralda.tnt_filtrante_780_total_unit_cost = round(fralda.tnt_filtrante_780 * costs.tnt_filtrante_780_price, 4)
-    fralda.fita_adesiva_tape_total_unit_cost = round(fralda.fita_adesiva_tape * costs.fita_adesiva_tape_price, 4)
-    fralda.elastico_elastano_lycra_total_unit_cost = round(fralda.elastico_elastano_lycra * costs.elastico_elastano_lycra_price, 4)
-    fralda.barreira_total_unit_cost = round(fralda.barreira * costs.barreira_price, 4)
-    fralda.polietileno_filme_780_total_unit_cost = round(fralda.polietileno_filme_780 * costs.polietileno_filme_780_price, 4)
-    fralda.hot_melt_const_total_unit_cost = round(fralda.hot_melt_const * costs.hot_melt_const_price, 4)
-
-    fralda.custo_pacote = round((total_cost * fralda.qtd_p_pacote) + fralda.embalagem + fralda.saco_fardos, 4)
-    fralda.custo_unitario_final = round(fralda.custo_pacote / fralda.qtd_p_pacote, 4)
-
-    fralda.preco_venda = round((fralda.custo_pacote) / (1 - (fralda.comissao + fralda.impostos + fralda.frete + fralda.margem_contribuicao + fralda.st) / 100), 4)
-    fralda.preco_venda_unitario = round(fralda.preco_venda / fralda.qtd_p_pacote, 4)
-
-    fralda.preco_venda_st = round(fralda.preco_venda * (1 + fralda.st / 100), 4)
-    fralda.preco_venda_st_unitario = round(fralda.preco_venda_st / fralda.qtd_p_pacote, 4)
-
-    fralda.save()
     
     return render(request, 'bellafral_simulator.html', {'total_cost': total_cost, 'simulation': simulation})
 
@@ -300,18 +300,25 @@ def simulator_details(request, id):
     simulation = get_object_or_404(Simulations, id=id)
     total_cost = get_total_cost(simulation.fralda_object, simulation.costs_object)
 
-    total_unit_cost = {
-        'celulose_virgem': round(simulation.costs_object.celulose_virgem_price * simulation.fralda_object.celulose_virgem, 4),
-        'gel': round(simulation.costs_object.gel_price * simulation.fralda_object.gel, 4),
-        'tnt_filtrante_780': round(simulation.costs_object.tnt_filtrante_780_price * simulation.fralda_object.tnt_filtrante_780, 4),
-        'fita_adesiva_tape': round(simulation.costs_object.fita_adesiva_tape_price * simulation.fralda_object.fita_adesiva_tape, 4),
-        'elastico_elastano_lycra': round(simulation.costs_object.elastico_elastano_lycra_price * simulation.fralda_object.elastico_elastano_lycra, 4),
-        'barreira': round(simulation.costs_object.barreira_price * simulation.fralda_object.barreira, 4),
-        'polietileno_filme_780': round(simulation.costs_object.polietileno_filme_780_price * simulation.fralda_object.polietileno_filme_780, 4),
-        'hot_melt_const': round(simulation.costs_object.hot_melt_const_price * simulation.fralda_object.hot_melt_const, 4),
-    }
+    simulation.fralda_object.celulose_virgem_total_unit_cost = round(simulation.fralda_object.celulose_virgem * simulation.costs_object.celulose_virgem_price, 4)
+    simulation.fralda_object.gel_total_unit_cost = round(simulation.fralda_object.gel * simulation.costs_object.gel_price, 4)
+    simulation.fralda_object.tnt_filtrante_780_total_unit_cost = round(simulation.fralda_object.tnt_filtrante_780 * simulation.costs_object.tnt_filtrante_780_price, 4)
+    simulation.fralda_object.fita_adesiva_tape_total_unit_cost = round(simulation.fralda_object.fita_adesiva_tape * simulation.costs_object.fita_adesiva_tape_price, 4)
+    simulation.fralda_object.elastico_elastano_lycra_total_unit_cost = round(simulation.fralda_object.elastico_elastano_lycra * simulation.costs_object.elastico_elastano_lycra_price, 4)
+    simulation.fralda_object.barreira_total_unit_cost = round(simulation.fralda_object.barreira * simulation.costs_object.barreira_price, 4)
+    simulation.fralda_object.polietileno_filme_780_total_unit_cost = round(simulation.fralda_object.polietileno_filme_780 * simulation.costs_object.polietileno_filme_780_price, 4)
+    simulation.fralda_object.hot_melt_const_total_unit_cost = round(simulation.fralda_object.hot_melt_const * simulation.costs_object.hot_melt_const_price, 4)
 
-    return render(request, 'simulator_details.html', {'simulation': simulation, 'total_cost': total_cost, 'total_unit_cost': total_unit_cost})
+    simulation.fralda_object.custo_pacote = round((total_cost * simulation.fralda_object.qtd_p_pacote) + simulation.fralda_object.embalagem + simulation.fralda_object.saco_fardos, 4)
+    simulation.fralda_object.custo_unitario_final = round(simulation.fralda_object.custo_pacote / simulation.fralda_object.qtd_p_pacote, 4)
+
+    simulation.fralda_object.preco_venda = round((simulation.fralda_object.custo_pacote) / (1 - (simulation.fralda_object.comissao + simulation.fralda_object.impostos + simulation.fralda_object.frete + simulation.fralda_object.margem_contribuicao + simulation.fralda_object.st) / 100), 4)
+    simulation.fralda_object.preco_venda_unitario = round(simulation.fralda_object.preco_venda / simulation.fralda_object.qtd_p_pacote, 4)
+
+    simulation.fralda_object.preco_venda_st = round(simulation.fralda_object.preco_venda * (1 + simulation.fralda_object.st / 100), 4)
+    simulation.fralda_object.preco_venda_st_unitario = round(simulation.fralda_object.preco_venda_st / simulation.fralda_object.qtd_p_pacote, 4)
+
+    return render(request, 'simulator_details.html', {'simulation': simulation, 'total_cost': total_cost})
 
 def simulator_delete(request, id):
     simulation = get_object_or_404(Simulations, id=id)

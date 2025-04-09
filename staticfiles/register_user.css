@@ -1,0 +1,44 @@
+#register_user_header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+h2 {
+    margin-top: 1em;
+    width: fit-content;
+    padding: 0.5em;
+    border-radius: 0.5em;
+    text-align: center;
+    background-color: #f8f9fa;
+    color: #000;
+}
+form {
+    padding: 1em;
+    margin: 1em;
+    background-color: #f8f9fa;
+    font-size: larger;
+    border-radius: 0.5em;
+    color: #000;
+}
+table {
+    font-weight: bold;
+    text-align: center;
+}
+table tr, table td {
+    border-radius: 0.25em;
+    border: 2px solid #000;
+}
+table td {
+    padding: 4px;
+}
+ul li {
+    text-align: left;
+}
+ul li h6 {
+    margin: 0;
+}
+button {
+    border-radius: 0.5em;
+    background-color: #f8f9fa;
+    color: #000;
+}

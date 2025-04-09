@@ -1,0 +1,50 @@
+#costs_base_edit_header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h2 {
+    margin-top: 1em;
+    width: fit-content;
+    padding: 0.5em;
+    border-radius: 0.5em;
+    text-align: center;
+    background-color: #f8f9fa;
+    color: #000;
+}
+
+#costs_base_edit_form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    color: #f8f9fa;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+table tr {
+    border: 1px solid #f8f9fa;
+}
+
+table tr td {
+    padding: 0.5em;
+    text-align: right;
+    font-weight: bold;
+}
+
+button {
+    width: 100%;
+    border-radius: 0.5em;
+    background-color: #f8f9fa;
+    color: #000;
+}

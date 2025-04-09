@@ -14,5 +14,22 @@ class BellafralSimulatorForm(forms.Form):
 class BellafralEditForm(forms.ModelForm):
     class Meta:
         model = Bellafral
-        fields = '__all__'
+        fields = [
+            'celulose_virgem',
+            'gel',
+            'tnt_filtrante_780',
+            'fita_adesiva_tape',
+            'elastico_elastano_lycra',
+            'barreira',
+            'polietileno_filme_780',
+            'hot_melt_const',
+            'qtd_p_pacote',
+            'embalagem',
+            'saco_fardos',
+            'comissao',
+            'impostos',
+            'frete',
+            'margem_contribuicao',
+            'st',
+        ]
 

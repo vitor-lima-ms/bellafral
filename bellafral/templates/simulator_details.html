@@ -27,53 +27,53 @@
                     <td> Celulose virgem (Kg)</td>
                     <td>{{ simulation.fralda_object.celulose_virgem }}</td>
                     <td>R$ {{ simulation.costs_object.celulose_virgem_price }}</td>
-                    <td>R$ {{ total_unit_cost.celulose_virgem }}</td>
+                    <td>R$ {{ simulation.fralda_object.celulose_virgem_total_unit_cost }}</td>
                 </tr>
                 <tr>
                     <td>Gel (Kg)</td>
                     <td>{{ simulation.fralda_object.gel }}</td>
                     <td>R$ {{ simulation.costs_object.gel_price }}</td>
-                    <td>R$ {{ total_unit_cost.gel }}</td>
+                    <td>R$ {{ simulation.fralda_object.gel_total_unit_cost }}</td>
                 </tr>
                 <tr>
                     <td>TNT - Filtrante - 780mm (m2)</td>
                     <td>{{ simulation.fralda_object.tnt_filtrante_780 }}</td>
                     <td>R$ {{ simulation.costs_object.tnt_filtrante_780_price }}</td>
-                    <td>R$ {{ total_unit_cost.tnt_filtrante_780 }}</td>
+                    <td>R$ {{ simulation.fralda_object.tnt_filtrante_780_total_unit_cost }}</td>
                 </tr>
                 <tr>
                     <td>Fita adesiva - Tape (Kg)</td>
                     <td>{{ simulation.fralda_object.fita_adesiva_tape }}</td>
                     <td>R$ {{ simulation.costs_object.fita_adesiva_tape_price }}</td>
-                    <td>R$ {{ total_unit_cost.fita_adesiva_tape }}</td>
+                    <td>R$ {{ simulation.fralda_object.fita_adesiva_tape_total_unit_cost }}</td>
                 </tr>
                 <tr>
                     <td>Elástico - Elastano - Lycra (Kg)</td>
                     <td>{{ simulation.fralda_object.elastico_elastano_lycra }}</td>
                     <td>R$ {{ simulation.costs_object.elastico_elastano_lycra_price }}</td>
-                    <td>R$ {{ total_unit_cost.elastico_elastano_lycra }}</td>
+                    <td>R$ {{ simulation.fralda_object.elastico_elastano_lycra_total_unit_cost }}</td>
                 </tr>
                 <tr>
                     <td>Barreira (m2)</td>
                     <td>{{ simulation.fralda_object.barreira }}</td>
                     <td>R$ {{ simulation.costs_object.barreira_price }}</td>
-                    <td>R$ {{ total_unit_cost.barreira }}</td>
+                    <td>R$ {{ simulation.fralda_object.barreira_total_unit_cost }}</td>
                 </tr>
                 <tr>
                     <td>Polietileno - Filme - 780mm (Kg)</td>
                     <td>{{ simulation.fralda_object.polietileno_filme_780 }}</td>
                     <td>R$ {{ simulation.costs_object.polietileno_filme_780_price }}</td>
-                    <td>R$ {{ total_unit_cost.polietileno_filme_780 }}</td>
+                    <td>R$ {{ simulation.fralda_object.polietileno_filme_780_total_unit_cost }}</td>
                 </tr>
                 <tr>
                     <td>Hot-Melt Construção (Kg)</td>
                     <td>{{ simulation.fralda_object.hot_melt_const }}</td>
                     <td>R$ {{ simulation.costs_object.hot_melt_const_price }}</td>
-                    <td>R$ {{ total_unit_cost.hot_melt_const }}</td>
+                    <td>R$ {{ simulation.fralda_object.hot_melt_const_total_unit_cost }}</td>
                 </tr>
                 <tr>
                     <td colspan="3"><b>Custo total (R$)</b></td>
-                    <td>{{ total_cost }}</td>
+                    <td>{{ simulation.costs_object.total_cost }}</td>
                 </tr>
                 <tr>
                     <td colspan="3"><b>Quantidade de peças por pacote</b></td>
@@ -108,8 +108,8 @@
                     <td>{{ simulation.fralda_object.frete }}</td>
                 </tr>
                 <tr>
-                    <td colspan="3"><b>Margem de contribuição (%)</b></td>
-                    <td>{{ simulation.fralda_object.margem_contribuicao }}</td>
+                    <td class="margem_contribuicao" colspan="3"><b>Margem de contribuição (%)</b></td>
+                    <td class="margem_contribuicao">{{ simulation.fralda_object.margem_contribuicao }}</td>
                 </tr>
                 <tr>
                     <td colspan="3"><b>ST (%)</b></td>

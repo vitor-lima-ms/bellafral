@@ -6,6 +6,7 @@ from base_dir.functions import get_total_cost
 def index(request):
     try:
         simulations = get_list_or_404(Simulations)
+        print(simulations)
 
         simulations_list = []
         for simulation in simulations:
@@ -21,7 +22,18 @@ def index(request):
             simulation.fralda_object.polietileno_filme_780_total_unit_cost = round(simulation.fralda_object.polietileno_filme_780 * simulation.costs_object.polietileno_filme_780_price, 4)
             simulation.fralda_object.hot_melt_const_total_unit_cost = round(simulation.fralda_object.hot_melt_const * simulation.costs_object.hot_melt_const_price, 4)
 
+            simulation.fralda_object.custo_pacote = round((total_cost * simulation.fralda_object.qtd_p_pacote) + simulation.fralda_object.embalagem + simulation.fralda_object.saco_fardos, 4)
+            simulation.fralda_object.custo_unitario_final = round(simulation.fralda_object.custo_pacote / simulation.fralda_object.qtd_p_pacote, 4)
+
+            simulation.fralda_object.preco_venda = round((simulation.fralda_object.custo_pacote) / (1 - (simulation.fralda_object.comissao + simulation.fralda_object.impostos + simulation.fralda_object.frete + simulation.fralda_object.margem_contribuicao + simulation.fralda_object.st) / 100), 4)
+            simulation.fralda_object.preco_venda_unitario = round(simulation.fralda_object.preco_venda / simulation.fralda_object.qtd_p_pacote, 4)
+
+            simulation.fralda_object.preco_venda_st = round(simulation.fralda_object.preco_venda * (1 + simulation.fralda_object.st / 100), 4)
+            simulation.fralda_object.preco_venda_st_unitario = round(simulation.fralda_object.preco_venda_st / simulation.fralda_object.qtd_p_pacote, 4)
+            
             simulation.fralda_object.save()
+            simulation.costs_object.save()
+            simulation.save()
             
             simulations_list.append(simulation)
 

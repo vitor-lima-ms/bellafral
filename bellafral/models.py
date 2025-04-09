@@ -49,7 +49,7 @@ class Bellafral(models.Model):
 
     embalagem = models.DecimalField(verbose_name='Embalagem (R$)', max_digits=10, decimal_places=4, default=0)
 
-    saco_fardos = models.DecimalField(verbose_name='Saco para fardos (R$)', max_digits=10, decimal_places=4, default=0)
+    saco_fardos = models.DecimalField(verbose_name='Saco para fardos/Encarte (R$)', max_digits=10, decimal_places=4, default=0)
 
     custo_pacote = models.DecimalField(blank=True, null=True, verbose_name='Custo do pacote (R$)', max_digits=10, decimal_places=4, default=0)
 

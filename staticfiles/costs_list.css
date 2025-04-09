@@ -1,0 +1,38 @@
+
+#success_message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1em;
+}
+
+#costs_list_header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h2 {
+    margin-top: 1em;
+    width: fit-content;
+    padding: 0.5em;
+    border-radius: 0.5em;
+    text-align: center;
+    background-color: #f8f9fa;
+    color: #000;
+}
+
+#costs_list {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1em;
+}
+
+#costs_list a {
+    text-decoration: none;
+    color: #f8f9fa;
+    font-weight: bold;
+    font-size: 1.5em;
+}
