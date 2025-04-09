@@ -1,10 +1,61 @@
 {% extends 'index.html' %}
 
+{% block css %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static "costs_form.css" %}">
+{% endblock css %}
+
 {% block content %}
-    <form action="{% url 'costs:costs_form' %}" method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Salvar</button>
-    </form>
+    <section id="costs_form_header">
+        <h2>Criar Custo</h2>
+    </section>
+    <section id="costs_form">
+        <form action="{% url 'costs:costs_form' %}" method="post">
+            {% csrf_token %}
+            <table>
+                <tr>
+                    <td>{{ form.identificador.label_tag }}</td>
+                    <td>{{ form.identificador }}</td>
+                </tr>
+                <tr>
+                    <td>{{ form.celulose_virgem_price.label_tag }}</td>
+                    <td>{{ form.celulose_virgem_price }}</td>
+                </tr>
+                <tr>
+                    <td>{{ form.gel_price.label_tag }}</td>
+                    <td>{{ form.gel_price }}</td>
+                </tr>
+                <tr>
+                    <td>{{ form.tnt_filtrante_780_price.label_tag }}</td>
+                    <td>{{ form.tnt_filtrante_780_price }}</td>
+                </tr>
+                <tr>
+                    <td>{{ form.fita_adesiva_tape_price.label_tag }}</td>
+                    <td>{{ form.fita_adesiva_tape_price }}</td>
+                </tr>
+                <tr>
+                    <td>{{ form.elastico_elastano_lycra_price.label_tag }}</td>
+                    <td>{{ form.elastico_elastano_lycra_price }}</td>
+                </tr>
+                <tr>
+                    <td>{{ form.barreira_price.label_tag }}</td>
+                    <td>{{ form.barreira_price }}</td>
+                </tr>
+                <tr>
+                    <td>{{ form.polietileno_filme_780_price.label_tag }}</td>
+                    <td>{{ form.polietileno_filme_780_price }}</td>
+                </tr>
+                <tr>
+                    <td>{{ form.hot_melt_const_price.label_tag }}</td>
+                    <td>{{ form.hot_melt_const_price }}</td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <button type="submit">Salvar</button>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </section>
 {% endblock content %}
 

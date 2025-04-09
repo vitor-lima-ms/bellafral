@@ -1,0 +1,64 @@
+#update_button_section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+#update_button {
+    margin-top: 1em;
+    width: fit-content;
+    padding: 0.5em;
+    border-radius: 0.5em;
+    text-align: center;
+}
+
+#simulation_header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h4 {
+    margin-top: 1em;
+    width: fit-content;
+    padding: 0.5em;
+    border-radius: 0.5em;
+    text-align: center;
+    background-color: #f8f9fa;
+    color: #000;
+}
+
+#simulation_details_table {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2em;
+    margin-bottom: 2em;
+    color: #f8f9fa;
+}
+
+table {
+    border-collapse: collapse;
+}
+
+table th {
+    text-align: center;
+    width: 10em;
+}
+
+table tr {
+    border: 1px solid #f8f9fa;
+}
+
+table tr td {
+    padding: 0.5em;
+    text-align: center;
+    font-weight: bold;
+}
+
+button {
+    width: 100%;
+    border-radius: 0.5em;
+    background-color: #f8f9fa;
+    color: #000;
+}

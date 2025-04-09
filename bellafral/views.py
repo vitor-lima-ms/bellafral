@@ -12,7 +12,7 @@ def bellafral_form(request):
         form = BellafralForm(request.POST)
         if form.is_valid():
             for value in form.cleaned_data.values():
-                if type(value) == str:
+                if type(value) == str or value == None:
                     continue
                 elif value < 0:
                     messages.error(request, 'Valores não podem ser negativos')
@@ -44,56 +44,44 @@ def bellafral_pre_simulator(request):
 
 def bellafral_simulator(request):
     if request.method == 'POST':
-        form = BellafralSimulatorForm(request.POST)
-        
-        if form.is_valid():
-            fralda = form.cleaned_data['fralda']
-            print(fralda)
-            costs = form.cleaned_data['costs']
+            form = BellafralSimulatorForm(request.POST)
+                        
+            if form.is_valid():
+                fralda = form.cleaned_data['fralda']
+                costs = form.cleaned_data['costs']
     else:
         form = BellafralSimulatorForm()
+        return render(request, 'bellafral_pre_simulator.html', {'form': form})
 
     total_cost = get_total_cost(fralda, costs)
 
-    for key in total_cost.keys():
-        total_cost[key] = float(total_cost[key])
-
     simulation = Simulations.objects.create(
-        fralda={
-                'celulose_virgem': float(fralda.celulose_virgem),
-                'gel': float(fralda.gel),
-                'tnt_filtrante_780': float(fralda.tnt_filtrante_780),
-                'fita_adesiva_tape': float(fralda.fita_adesiva_tape),
-                'elastico_elastano_lycra': float(fralda.elastico_elastano_lycra),
-                'barreira': float(fralda.barreira),
-                'polietileno_filme_780': float(fralda.polietileno_filme_780),
-                'hot_melt_const': float(fralda.hot_melt_const),
-            },
         fralda_object=fralda,
-        costs={
-                'celulose_virgem_price': float(costs.celulose_virgem_price),
-                'gel_price': float(costs.gel_price),
-                'tnt_filtrante_780_price': float(costs.tnt_filtrante_780_price),
-                'fita_adesiva_tape_price': float(costs.fita_adesiva_tape_price),
-                'elastico_elastano_lycra_price': float(costs.elastico_elastano_lycra_price),
-                'barreira_price': float(costs.barreira_price),
-                'polietileno_filme_780_price': float(costs.polietileno_filme_780_price),
-                'hot_melt_const_price': float(costs.hot_melt_const_price),
-            },
         costs_object=costs,
-        simulation=total_cost,
         )
     simulation.save()
 
-    return render(request, 'bellafral_simulator.html', {'costs': costs, 'fralda': fralda, 'total_cost': total_cost, 'simulation': simulation})
+    fralda.celulose_virgem_total_unit_cost = round(fralda.celulose_virgem * costs.celulose_virgem_price, 4)
+    fralda.gel_total_unit_cost = round(fralda.gel * costs.gel_price, 4)
+    fralda.tnt_filtrante_780_total_unit_cost = round(fralda.tnt_filtrante_780 * costs.tnt_filtrante_780_price, 4)
+    fralda.fita_adesiva_tape_total_unit_cost = round(fralda.fita_adesiva_tape * costs.fita_adesiva_tape_price, 4)
+    fralda.elastico_elastano_lycra_total_unit_cost = round(fralda.elastico_elastano_lycra * costs.elastico_elastano_lycra_price, 4)
+    fralda.barreira_total_unit_cost = round(fralda.barreira * costs.barreira_price, 4)
+    fralda.polietileno_filme_780_total_unit_cost = round(fralda.polietileno_filme_780 * costs.polietileno_filme_780_price, 4)
+    fralda.hot_melt_const_total_unit_cost = round(fralda.hot_melt_const * costs.hot_melt_const_price, 4)
 
-def download_simulation(request):
+    fralda.save()
+    
+    return render(request, 'bellafral_simulator.html', {'total_cost': total_cost, 'simulation': simulation})
+
+def download_simulation(request, id):
     response = HttpResponse(content_type='text/csv')
     response['Content-Disposition'] = 'attachment; filename="simulation.csv"'
 
     csv_writer = csv.writer(response)
 
-    simulation = Simulations.objects.last()
+    simulation = get_object_or_404(Simulations, id=id)
+    total_cost = get_total_cost(simulation.fralda_object, simulation.costs_object)
 
     csv_writer.writerow(
         [
@@ -107,79 +95,79 @@ def download_simulation(request):
     csv_writer.writerow(
         [
             'Celulose virgem (Kg)',
-            simulation.fralda['celulose_virgem'],
-            simulation.costs['celulose_virgem_price'],
-            simulation.simulation['celulose_virgem'],
+            simulation.fralda_object.celulose_virgem,
+            simulation.costs_object.celulose_virgem_price,
+            round(simulation.fralda_object.celulose_virgem * simulation.costs_object.celulose_virgem_price, 4),
         ]
     )
 
     csv_writer.writerow(
         [
             'Gel (Kg)',
-            simulation.fralda['gel'],
-            simulation.costs['gel_price'],
-            simulation.simulation['gel'],
+            simulation.fralda_object.gel,
+            simulation.costs_object.gel_price,
+            round(simulation.fralda_object.gel * simulation.costs_object.gel_price, 4),
         ]
     )
 
     csv_writer.writerow(
         [
             'TNT - Filtrante - 780mm (m2)',
-            simulation.fralda['tnt_filtrante_780'],
-            simulation.costs['tnt_filtrante_780_price'],
-            simulation.simulation['tnt_filtrante_780'],
+            simulation.fralda_object.tnt_filtrante_780,
+            simulation.costs_object.tnt_filtrante_780_price,
+            round(simulation.fralda_object.tnt_filtrante_780 * simulation.costs_object.tnt_filtrante_780_price, 4),
         ]
     )
 
     csv_writer.writerow(
         [
             'Fita adesiva - Tape (Kg)',
-            simulation.fralda['fita_adesiva_tape'],
-            simulation.costs['fita_adesiva_tape_price'],
-            simulation.simulation['fita_adesiva_tape'],
+            simulation.fralda_object.fita_adesiva_tape,
+            simulation.costs_object.fita_adesiva_tape_price,
+            round(simulation.fralda_object.fita_adesiva_tape * simulation.costs_object.fita_adesiva_tape_price, 4),
         ]
     )
 
     csv_writer.writerow(
         [
             'Elástico - Elastano - Lycra (Kg)',
-            simulation.fralda['elastico_elastano_lycra'],
-            simulation.costs['elastico_elastano_lycra_price'],
-            simulation.simulation['elastico_elastano_lycra'],
+            simulation.fralda_object.elastico_elastano_lycra,
+            simulation.costs_object.elastico_elastano_lycra_price,
+            round(simulation.fralda_object.elastico_elastano_lycra * simulation.costs_object.elastico_elastano_lycra_price, 4),
         ]
     )
 
     csv_writer.writerow(
         [
             'Barreira (m2)',
-            simulation.fralda['barreira'],
-            simulation.costs['barreira_price'],
-            simulation.simulation['barreira'],
+            simulation.fralda_object.barreira,
+            simulation.costs_object.barreira_price,
+            round(simulation.fralda_object.barreira * simulation.costs_object.barreira_price, 4),
         ]
     )
 
     csv_writer.writerow(
         [
             'Polietileno - Filme - 780mm (Kg)',
-            simulation.fralda['polietileno_filme_780'],
-            simulation.costs['polietileno_filme_780_price'],
-            simulation.simulation['polietileno_filme_780'],
+            simulation.fralda_object.polietileno_filme_780,
+            simulation.costs_object.polietileno_filme_780_price,
+            round(simulation.fralda_object.polietileno_filme_780 * simulation.costs_object.polietileno_filme_780_price, 4),
         ]
     )
 
     csv_writer.writerow(
         [
             'Hot-Melt Construção (Kg)',
-            simulation.fralda['hot_melt_const'],
-            simulation.costs['hot_melt_const_price'],
-            simulation.simulation['hot_melt_const'],
+            simulation.fralda_object.hot_melt_const,
+            simulation.costs_object.hot_melt_const_price,
+            round(simulation.fralda_object.hot_melt_const * simulation.costs_object.hot_melt_const_price, 4),
         ]
     )
 
     csv_writer.writerow(
         [
             'Custo total',
-            simulation.simulation['total_cost'],
+            total_cost,
         ]
     )
     
@@ -191,7 +179,20 @@ def simulator_list(request):
 
 def simulator_details(request, id):
     simulation = get_object_or_404(Simulations, id=id)
-    return render(request, 'simulator_details.html', {'costs': simulation.costs, 'fralda': simulation.fralda, 'total_cost': simulation.simulation, 'simulation': simulation})
+    total_cost = get_total_cost(simulation.fralda_object, simulation.costs_object)
+
+    total_unit_cost = {
+        'celulose_virgem': round(simulation.costs_object.celulose_virgem_price * simulation.fralda_object.celulose_virgem, 4),
+        'gel': round(simulation.costs_object.gel_price * simulation.fralda_object.gel, 4),
+        'tnt_filtrante_780': round(simulation.costs_object.tnt_filtrante_780_price * simulation.fralda_object.tnt_filtrante_780, 4),
+        'fita_adesiva_tape': round(simulation.costs_object.fita_adesiva_tape_price * simulation.fralda_object.fita_adesiva_tape, 4),
+        'elastico_elastano_lycra': round(simulation.costs_object.elastico_elastano_lycra_price * simulation.fralda_object.elastico_elastano_lycra, 4),
+        'barreira': round(simulation.costs_object.barreira_price * simulation.fralda_object.barreira, 4),
+        'polietileno_filme_780': round(simulation.costs_object.polietileno_filme_780_price * simulation.fralda_object.polietileno_filme_780, 4),
+        'hot_melt_const': round(simulation.costs_object.hot_melt_const_price * simulation.fralda_object.hot_melt_const, 4),
+    }
+
+    return render(request, 'simulator_details.html', {'simulation': simulation, 'total_cost': total_cost, 'total_unit_cost': total_unit_cost})
 
 def simulator_delete(request, id):
     simulation = get_object_or_404(Simulations, id=id)

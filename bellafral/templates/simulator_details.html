@@ -1,74 +1,89 @@
 {% extends "index.html" %}
 
+{% block css %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static "simulator_details.css" %}">
+{% endblock css %}
+
 {% block content %}
-    <h2>Simulação - {{ simulation }}</h2>
-    <a href="{% url 'bellafral:download_simulation' %}">Download .csv</a>
-    <table>
-        <thead>
-            <tr>
-                <th>Item</th>
-                <th>Quantidade</th>
-                <th>Custo unitário</th>
-                <th>Custo total</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td> Celulose virgem (Kg)</td>
-                <td>{{ fralda.celulose_virgem }}</td>
-                <td>{{ costs.celulose_virgem_price }}</td>
-                <td>{{ total_cost.celulose_virgem }}</td>
-            </tr>
-            <tr>
-                <td>Gel (Kg)</td>
-                <td>{{ fralda.gel }}</td>
-                <td>{{ costs.gel_price }}</td>
-                <td>{{ total_cost.gel }}</td>
-            </tr>
-            <tr>
-                <td>TNT - Filtrante - 780mm (m2)</td>
-                <td>{{ fralda.tnt_filtrante_780 }}</td>
-                <td>{{ costs.tnt_filtrante_780_price }}</td>
-                <td>{{ total_cost.tnt_filtrante_780 }}</td>
-            </tr>
-            <tr>
-                <td>Fita adesiva - Tape (Kg)</td>
-                <td>{{ fralda.fita_adesiva_tape }}</td>
-                <td>{{ costs.fita_adesiva_tape_price }}</td>
-                <td>{{ total_cost.fita_adesiva_tape }}</td>
-            </tr>
-            <tr>
-                <td>Elástico - Elastano - Lycra (Kg)</td>
-                <td>{{ fralda.elastico_elastano_lycra }}</td>
-                <td>{{ costs.elastico_elastano_lycra_price }}</td>
-                <td>{{ total_cost.elastico_elastano_lycra }}</td>
-            </tr>
-            <tr>
-                <td>Barreira (m2)</td>
-                <td>{{ fralda.barreira }}</td>
-                <td>{{ costs.barreira_price }}</td>
-                <td>{{ total_cost.barreira }}</td>
-            </tr>
-            <tr>
-                <td>Polietileno - Filme - 780mm (Kg)</td>
-                <td>{{ fralda.polietileno_filme_780 }}</td>
-                <td>{{ costs.polietileno_filme_780_price }}</td>
-                <td>{{ total_cost.polietileno_filme_780 }}</td>
-            </tr>
-            <tr>
-                <td>Hot-Melt Construção (Kg)</td>
-                <td>{{ fralda.hot_melt_const }}</td>
-                <td>{{ costs.hot_melt_const_price }}</td>
-                <td>{{ total_cost.hot_melt_const }}</td>
-            </tr>
-            <tr>
-                <td colspan="3"><b>Custo total (R$)</b></td>
-                <td>{{ total_cost.total_cost }}</td>
-            </tr>
-        </tbody>
-    </table>
-    <form action="{% url 'bellafral:simulator_delete' simulation.id %}" method="post">
-        {% csrf_token %}
-        <button type="submit">Deletar</button>
-    </form>
+    <section id="simulator_details_header">
+        <h2>Simulação - {{ simulation }}</h2>
+    </section>
+    <section id="simulator_details_download">
+        <a href="{% url 'bellafral:download_simulation' simulation.id %}">Download .csv</a>
+    </section>
+    <section id="simulator_details_table">
+        <table>
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Quantidade</th>
+                    <th>Custo unitário</th>
+                    <th>Custo total</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td> Celulose virgem (Kg)</td>
+                    <td>{{ simulation.fralda_object.celulose_virgem }}</td>
+                    <td>R$ {{ simulation.costs_object.celulose_virgem_price }}</td>
+                    <td>R$ {{ total_unit_cost.celulose_virgem }}</td>
+                </tr>
+                <tr>
+                    <td>Gel (Kg)</td>
+                    <td>{{ simulation.fralda_object.gel }}</td>
+                    <td>R$ {{ simulation.costs_object.gel_price }}</td>
+                    <td>R$ {{ total_unit_cost.gel }}</td>
+                </tr>
+                <tr>
+                    <td>TNT - Filtrante - 780mm (m2)</td>
+                    <td>{{ simulation.fralda_object.tnt_filtrante_780 }}</td>
+                    <td>R$ {{ simulation.costs_object.tnt_filtrante_780_price }}</td>
+                    <td>R$ {{ total_unit_cost.tnt_filtrante_780 }}</td>
+                </tr>
+                <tr>
+                    <td>Fita adesiva - Tape (Kg)</td>
+                    <td>{{ simulation.fralda_object.fita_adesiva_tape }}</td>
+                    <td>R$ {{ simulation.costs_object.fita_adesiva_tape_price }}</td>
+                    <td>R$ {{ total_unit_cost.fita_adesiva_tape }}</td>
+                </tr>
+                <tr>
+                    <td>Elástico - Elastano - Lycra (Kg)</td>
+                    <td>{{ simulation.fralda_object.elastico_elastano_lycra }}</td>
+                    <td>R$ {{ simulation.costs_object.elastico_elastano_lycra_price }}</td>
+                    <td>R$ {{ total_unit_cost.elastico_elastano_lycra }}</td>
+                </tr>
+                <tr>
+                    <td>Barreira (m2)</td>
+                    <td>{{ simulation.fralda_object.barreira }}</td>
+                    <td>R$ {{ simulation.costs_object.barreira_price }}</td>
+                    <td>R$ {{ total_unit_cost.barreira }}</td>
+                </tr>
+                <tr>
+                    <td>Polietileno - Filme - 780mm (Kg)</td>
+                    <td>{{ simulation.fralda_object.polietileno_filme_780 }}</td>
+                    <td>R$ {{ simulation.costs_object.polietileno_filme_780_price }}</td>
+                    <td>R$ {{ total_unit_cost.polietileno_filme_780 }}</td>
+                </tr>
+                <tr>
+                    <td>Hot-Melt Construção (Kg)</td>
+                    <td>{{ simulation.fralda_object.hot_melt_const }}</td>
+                    <td>R$ {{ simulation.costs_object.hot_melt_const_price }}</td>
+                    <td>R$ {{ total_unit_cost.hot_melt_const }}</td>
+                </tr>
+                <tr>
+                    <td colspan="3"><b>Custo total (R$)</b></td>
+                    <td>{{ total_cost }}</td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <form action="{% url 'bellafral:simulator_delete' simulation.id %}" method="post">
+                            {% csrf_token %}
+                            <button type="submit">Deletar</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
 {% endblock content %}

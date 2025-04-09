@@ -18,24 +18,39 @@ class Bellafral(models.Model):
     modelo = models.CharField(max_length=100, choices=modelos, default='Bellafral')
     identificador = models.CharField(max_length=100)
     tamanho = models.CharField(max_length=2, choices=tamanhos)
+    
     celulose_virgem = models.DecimalField(verbose_name='Celulose virgem (Kg)', max_digits=10, decimal_places=4, default=0)
+    celulose_virgem_total_unit_cost = models.DecimalField(verbose_name='Custo unitário da celulose virgem (R$)', max_digits=10, decimal_places=4, default=0, blank=True, null=True)
+    
     gel = models.DecimalField(verbose_name='Gel (Kg)', max_digits=10, decimal_places=4, default=0)
+    gel_total_unit_cost = models.DecimalField(verbose_name='Custo unitário do gel (R$)', max_digits=10, decimal_places=4, default=0, blank=True, null=True)
+    
     tnt_filtrante_780 = models.DecimalField(verbose_name='TNT - Filtrante - 780mm (m2)', max_digits=10, decimal_places=4, default=0)
+    tnt_filtrante_780_total_unit_cost = models.DecimalField(verbose_name='Custo unitário do TNT - Filtrante - 780mm (R$)', max_digits=10, decimal_places=4, default=0, blank=True, null=True)
+    
     fita_adesiva_tape = models.DecimalField(verbose_name='Fita adesiva - Tape (Kg)', max_digits=10, decimal_places=4, default=0)
+    fita_adesiva_tape_total_unit_cost = models.DecimalField(verbose_name='Custo unitário da fita adesiva - Tape (R$)', max_digits=10, decimal_places=4, default=0, blank=True, null=True)
+    
     elastico_elastano_lycra = models.DecimalField(verbose_name='Elástico - Elastano - Lycra (Kg)', max_digits=10, decimal_places=4, default=0)
+    elastico_elastano_lycra_total_unit_cost = models.DecimalField(verbose_name='Custo unitário do elástico - Elastano - Lycra (R$)', max_digits=10, decimal_places=4, default=0, blank=True, null=True)
+    
     barreira = models.DecimalField(verbose_name='Barreira (m2)', max_digits=10, decimal_places=4, default=0)
+    barreira_total_unit_cost = models.DecimalField(verbose_name='Custo unitário da barreira (R$)', max_digits=10, decimal_places=4, default=0, blank=True, null=True)
+    
     polietileno_filme_780 = models.DecimalField(verbose_name='Polietileno - Filme - 780mm (Kg)', max_digits=10, decimal_places=4, default=0)
+    polietileno_filme_780_total_unit_cost = models.DecimalField(verbose_name='Custo unitário do polietileno - Filme - 780mm (R$)', max_digits=10, decimal_places=4, default=0, blank=True, null=True)
+    
     hot_melt_const = models.DecimalField(verbose_name='Hot-Melt Construção (Kg)', max_digits=10, decimal_places=4, default=0)
+    hot_melt_const_total_unit_cost = models.DecimalField(verbose_name='Custo unitário do Hot-Melt Construção (R$)', max_digits=10, decimal_places=4, default=0, blank=True, null=True)
+
+    total_cost = models.DecimalField(verbose_name='Custo total (R$)', max_digits=10, decimal_places=4, default=0, blank=True, null=True)
 
     def __str__(self):
         return (f'{self.modelo} {self.identificador} ({self.tamanho})')
 
 class Simulations(models.Model):
-    fralda = models.JSONField(default=dict)
     fralda_object = models.ForeignKey(Bellafral, on_delete=models.CASCADE, null=True, blank=True, default=None)
-    costs = models.JSONField(default=dict)
     costs_object = models.ForeignKey(Costs, on_delete=models.CASCADE, null=True, blank=True, default=None)
-    simulation = models.JSONField(default=dict)
 
     def __str__(self):
         return (f'Fralda: {self.fralda_object} - Custo: {self.costs_object}')

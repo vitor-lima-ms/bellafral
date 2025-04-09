@@ -1,13 +1,23 @@
 {% extends 'index.html' %}
 
+{% block css %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static "costs_list.css" %}">
+{% endblock css %}
+
 {% block content %}
     {% if messages %}
         {% for message in messages %}
             {{ message }}
         {% endfor %}
     {% endif %}
-    {% for cost in costs %}
-        <td><a href="{% url 'costs:costs_details' cost.id %}">{{ cost }}</a></td>
-    {% endfor %}
+    <section id="costs_list_header">
+        <h2>Lista de Custos</h2>
+    </section>
+    <section id="costs_list">
+        {% for cost in costs %}
+            <a href="{% url 'costs:costs_details' cost.id %}">{{ cost }}</a>
+        {% endfor %}
+    </section>
 {% endblock content %}
 

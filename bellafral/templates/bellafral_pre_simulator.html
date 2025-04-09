@@ -1,10 +1,41 @@
 {% extends 'index.html' %}
 
+{% block css %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static "bellafral_pre_simulator.css" %}">
+{% endblock css %}
+
 {% block content %}
-    <form action="{% url 'bellafral:bellafral_simulator' %}" method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Simular</button>
-    </form>
+    <section id="bellafral_pre_simulator_header">
+        <h2>Escolha dos parâmetros</h2>
+    </section>
+    <section id="bellafral_pre_simulator_form">
+        <table>
+            <form action="{% url 'bellafral:bellafral_simulator' %}" method="post">
+                {% csrf_token %}
+                <tr>
+                    <td>
+                        {{ form.fralda.label_tag }}
+                    </td>
+                    <td>
+                        {{ form.fralda }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        {{ form.costs.label_tag }}
+                    </td>
+                    <td>
+                        {{ form.costs }}
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <button type="submit">Simular</button>
+                    </td>
+                </tr>
+            </form>
+        </table>
+    </section>
 {% endblock content %}
 

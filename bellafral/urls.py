@@ -16,7 +16,7 @@ urlpatterns = [
 
     path('bellafral_simulator', views.bellafral_simulator, name='bellafral_simulator'),
 
-    path('download_simulation', views.download_simulation, name='download_simulation'),
+    path('download_simulation/<int:id>', views.download_simulation, name='download_simulation'),
 
     path('simulator_list', views.simulator_list, name='simulator_list'),
 

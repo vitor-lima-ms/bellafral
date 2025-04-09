@@ -20,13 +20,11 @@ class BellafralAdmin(admin.ModelAdmin):
     )
 
     class Meta:
-        verbose_name = 'bellafral'
-        verbose_name_plural = 'bellafral'
+        verbose_name_plural = 'Bellafral'
 
 @admin.register(Simulations)
 class SimulationsAdmin(admin.ModelAdmin):
-    list_display = ('simulation',)
+    list_display = ('fralda_object', 'costs_object')
 
     class Meta:
-        verbose_name = 'Simulation'
         verbose_name_plural = 'Simulations'

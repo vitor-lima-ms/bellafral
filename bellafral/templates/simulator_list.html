@@ -1,13 +1,23 @@
 {% extends 'index.html' %}
 
+{% block css %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static "simulator_list.css" %}">
+{% endblock css %}
+
 {% block content %}
     {% if messages %}
         {% for message in messages %}
             {{ message }}
         {% endfor %}
     {% endif %}
-    {% for simulation in simulations %}
-        <td><a href="{% url "bellafral:simulator_details" simulation.id %}">{{ simulation }}</a></td>
-    {% endfor %}
+    <section id="simulator_list_header">
+        <h2>Lista de simulações</h2>
+    </section>
+    <section id="simulator_list">
+        {% for simulation in simulations %}
+            <td><a href="{% url "bellafral:simulator_details" simulation.id %}">{{ simulation }}</a></td>
+        {% endfor %}
+    </section>
 {% endblock content %}
 

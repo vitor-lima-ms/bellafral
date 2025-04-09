@@ -1,9 +1,25 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-from costs.my_forms import CostsForm
+from costs.my_forms import CostsForm, CostsBaseEditForm
 from costs.models import Costs
 
 # Create your views here.
+
+def costs_base(request):
+    cost = Costs.objects.get(identificador='Base')
+    return render(request, 'costs_base.html', {'cost': cost})
+
+def costs_base_edit(request, id):
+    cost = get_object_or_404(Costs, id=id)
+    form = CostsBaseEditForm(instance=cost)
+    return render(request, 'costs_base_edit.html', {'form': form, 'cost': cost})
+
+def costs_base_save(request, id):
+    cost = get_object_or_404(Costs, id=id)
+    form = CostsBaseEditForm(request.POST, instance=cost)
+    if form.is_valid():
+        form.save()
+        return redirect('costs:costs_base')
 
 def costs_form(request):
     if request.method == 'POST':
@@ -11,7 +27,7 @@ def costs_form(request):
         if form.is_valid():
             form.save()
             messages.success(request, 'Custos criados com sucesso')
-            return redirect('core:index')
+            return redirect('costs:costs_list')
     else:
         form = CostsForm()
     return render(request, 'costs_form.html', {'form': form})

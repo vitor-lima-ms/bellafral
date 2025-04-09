@@ -3,27 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
+    {% load static %}
+    <link rel="stylesheet" href="{% static "index.css" %}">
+    {% block css %}
+        <link rel="stylesheet" href="{% static "exclusive_index.css" %}">
+    {% endblock css %}
     <title>Bellafral</title>
 </head>
 <body>
-    <header>
-        <h1><a href="{% url "core:index" %}">Bellafral - Sistema de Simulação de Custos</a></h1>
-    </header>
-    <nav>
-        <ul>
-            <li><a href="{% url 'costs:costs_form' %}">Criar custos</a></li>
-            <li><a href="{% url 'costs:costs_list' %}">Listar custos</a></li>
-        </ul>
-        <ul>
-            <li><a href="{% url 'bellafral:bellafral_form' %}">Criar fralda</a></li>
-            <li><a href="{% url 'bellafral:bellafral_list' %}">Listar fraldas</a></li>
-            
-        </ul>
-        <ul>
-            <li><a href="{% url 'bellafral:bellafral_pre_simulator' %}">Simular</a></li>
-            <li><a href="{% url 'bellafral:simulator_list' %}">Listar simulações</a></li>
-        </ul>   
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{% url "core:index" %}">Bellafral - Sistema de Simulação de Custos</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Custos
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{% url "costs:costs_base" %}">Custo base</a></li>
+                            <li><a class="dropdown-item" href="{% url "costs:costs_form" %}">Criar custo</a></li>
+                            <li><a class="dropdown-item" href="{% url "costs:costs_list" %}">Listar custos</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Fraldas
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{% url "bellafral:bellafral_form" %}">Criar fralda</a></li>
+                            <li><a class="dropdown-item" href="{% url "bellafral:bellafral_list" %}">Listar fraldas</a></li>
+                        </ul>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            Simulações
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="{% url "bellafral:bellafral_pre_simulator" %}">Criar simulação</a></li>
+                            <li><a class="dropdown-item" href="{% url "bellafral:simulator_list" %}">Listar simulações</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
     </nav>
     {% block content %}
         {% if messages %}
@@ -31,6 +62,86 @@
                 {{ message }}
             {% endfor %}
         {% endif %}
+        {% for simulation in simulations %}
+            <section id="simulation_header">
+                <h4>{{ simulation.fralda_object }}</h4>
+            </section>
+            <section id="simulation_details_table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Quantidade</th>
+                            <th>Custo unitário</th>
+                            <th>Custo total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td> Celulose virgem (Kg)</td>
+                            <td>{{ simulation.fralda_object.celulose_virgem }}</td>
+                            <td>R$ {{ simulation.costs_object.celulose_virgem_price }}</td>
+                            <td>R$ {{ simulation.fralda_object.celulose_virgem_total_unit_cost }}</td>
+                        </tr>
+                        <tr>
+                            <td>Gel (Kg)</td>
+                            <td>{{ simulation.fralda_object.gel }}</td>
+                            <td>R$ {{ simulation.costs_object.gel_price }}</td>
+                            <td>R$ {{ simulation.fralda_object.gel_total_unit_cost }}</td>
+                        </tr>
+                        <tr>
+                            <td>TNT - Filtrante - 780mm (m2)</td>
+                            <td>{{ simulation.fralda_object.tnt_filtrante_780 }}</td>
+                            <td>R$ {{ simulation.costs_object.tnt_filtrante_780_price }}</td>
+                            <td>R$ {{ simulation.fralda_object.tnt_filtrante_780_total_unit_cost }}</td>
+                        </tr>
+                        <tr>
+                            <td>Fita adesiva - Tape (Kg)</td>
+                            <td>{{ simulation.fralda_object.fita_adesiva_tape }}</td>
+                            <td>R$ {{ simulation.costs_object.fita_adesiva_tape_price }}</td>
+                            <td>R$ {{ simulation.fralda_object.fita_adesiva_tape_total_unit_cost }}</td>
+                        </tr>
+                        <tr>
+                            <td>Elástico - Elastano - Lycra (Kg)</td>
+                            <td>{{ simulation.fralda_object.elastico_elastano_lycra }}</td>
+                            <td>R$ {{ simulation.costs_object.elastico_elastano_lycra_price }}</td>
+                            <td>R$ {{ simulation.fralda_object.elastico_elastano_lycra_total_unit_cost }}</td>
+                        </tr>
+                        <tr>
+                            <td>Barreira (m2)</td>
+                            <td>{{ simulation.fralda_object.barreira }}</td>
+                            <td>R$ {{ simulation.costs_object.barreira_price }}</td>
+                            <td>R$ {{ simulation.fralda_object.barreira_total_unit_cost }}</td>
+                        </tr>
+                        <tr>
+                            <td>Polietileno - Filme - 780mm (Kg)</td>
+                            <td>{{ simulation.fralda_object.polietileno_filme_780 }}</td>
+                            <td>R$ {{ simulation.costs_object.polietileno_filme_780_price }}</td>
+                            <td>R$ {{ simulation.fralda_object.polietileno_filme_780_total_unit_cost }}</td>
+                        </tr>
+                        <tr>
+                            <td>Hot-Melt Construção (Kg)</td>
+                            <td>{{ simulation.fralda_object.hot_melt_const }}</td>
+                            <td>R$ {{ simulation.costs_object.hot_melt_const_price }}</td>
+                            <td>R$ {{ simulation.fralda_object.hot_melt_const_total_unit_cost }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="3"><b>Custo total (R$)</b></td>
+                            <td>{{ simulation.fralda_object.total_cost }}</td>
+                        </tr>
+                        <tr>
+                            <td colspan="4">
+                                <form action="{% url 'bellafral:simulator_delete' simulation.id %}" method="post">
+                                    {% csrf_token %}
+                                    <button type="submit">Deletar</button>
+                                </form>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        {% endfor %}
     {% endblock content %}
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/js/bootstrap.bundle.min.js" integrity="sha384-k6d4wzSIapyDyv1kpU366/PK5hCdSbCRGRCMv+eplOQJWyd1fbcAu9OCUj5zNLiq" crossorigin="anonymous"></script>
 </body>
 </html>

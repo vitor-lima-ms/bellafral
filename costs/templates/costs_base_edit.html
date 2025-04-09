@@ -1,0 +1,15 @@
+{% extends "index.html" %}
+
+{% block css %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static "costs_base_edit.css" %}">
+{% endblock css %}
+
+{% block content %}
+    <h1>Editar custo base</h1>
+    <form action="{% url 'costs:costs_base_save' cost.id %}" method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Salvar</button>
+    </form>
+{% endblock %}

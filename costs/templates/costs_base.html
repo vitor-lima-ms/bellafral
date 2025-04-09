@@ -2,14 +2,14 @@
 
 {% block css %}
     {% load static %}
-    <link rel="stylesheet" href="{% static "costs_details.css" %}">
+    <link rel="stylesheet" href="{% static "costs_base.css" %}">
 {% endblock css %}
 
 {% block content %}
-    <section id="costs_details_header">
-        <h2>Detalhes do Custo</h2>
+    <section id="costs_base_header">
+        <h2>Custo base</h2>
     </section>
-    <section id="costs_details_table">
+    <section id="costs_base_table">
         <table>
             <tr>
                 <td>Identificador:</td>
@@ -48,10 +48,16 @@
                 <td>R$ {{ cost.hot_melt_const_price }}</td>
             </tr>
             <tr>
-                <td colspan="2">
+                <td>
                     <form action="{% url 'costs:costs_delete' cost.id %}" method="post">
                         {% csrf_token %}
                         <button type="submit">Deletar</button>
+                    </form>
+                </td>
+                <td>
+                    <form action="{% url 'costs:costs_base_edit' cost.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit">Editar</button>
                     </form>
                 </td>
             </tr>

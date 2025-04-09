@@ -1,39 +1,65 @@
 {% extends 'index.html' %}
 
+{% block css %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static "bellafral_details.css" %}">
+{% endblock css %}
+
 {% block content %}
-    <table>
-        <thead>
+    <section id="bellafral_details_header">
+        <h2>Detalhes da Bellafral</h2>
+    </section>
+    <section id="bellafral_details_table">
+        <table>
             <tr>
-                <th>Identificador</th>
-                <th>Tamanho</th>
-                <th>Celulose virgem (Kg)</th>
-                <th>Gel (Kg)</th>
-                <th>TNT - Filtrante - 780mm (m2)</th>
-                <th>Fita adesiva - Tape (Kg)</th>
-                <th>Elástico - Elastano - Lycra (Kg)</th>
-                <th>Barreira (m2)</th>
-                <th>Polietileno - Filme - 780mm (Kg)</th>
-                <th>Hot-Melt Construção (Kg)</th>
+            <td>Identificador:</td>
+            <td>{{ fralda }}</td>
             </tr>
-        </thead>
-        <tbody>
             <tr>
-                <td>{{ fralda }}</td>
+                <td>Tamanho:</td>
                 <td>{{ fralda.tamanho }}</td>
+            </tr>
+            <tr>
+                <td>Celulose virgem (Kg):</td>
                 <td>{{ fralda.celulose_virgem }}</td>
+            </tr>
+            <tr>
+                <td>Gel (Kg):</td>
                 <td>{{ fralda.gel }}</td>
+            </tr>
+            <tr>
+                <td>TNT - Filtrante - 780mm (m2):</td>
                 <td>{{ fralda.tnt_filtrante_780 }}</td>
+            </tr>
+            <tr>
+                <td>Fita adesiva - Tape (Kg):</td>
                 <td>{{ fralda.fita_adesiva_tape }}</td>
-                <td>{{ fralda.elastico_elastano_lycra }}</td>  
+            </tr>
+            <tr>
+                <td>Elástico - Elastano - Lycra (Kg):</td>  
+                <td>{{ fralda.elastico_elastano_lycra }}</td>
+            </tr>
+            <tr>
+                <td>Barreira (m2):</td>
                 <td>{{ fralda.barreira }}</td>
+            </tr>
+            <tr>
+                <td>Polietileno - Filme - 780mm (Kg):</td>
                 <td>{{ fralda.polietileno_filme_780 }}</td>
+            </tr>
+            <tr>
+                <td>Hot-Melt Construção (Kg):</td>
                 <td>{{ fralda.hot_melt_const }}</td>
             </tr>
-        </tbody>
-    </table>
-    <form action="{% url 'bellafral:bellafral_delete' fralda.id %}" method="post">
-        {% csrf_token %}
-        <button type="submit">Deletar</button>
-    </form>
+            <tr>
+                <td colspan="2">
+                    <form action="{% url 'bellafral:bellafral_delete' fralda.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit">Deletar</button>
+                    </form>
+                </td>
+            </tr>
+        </table>    
+    </section>
 {% endblock content %}
 

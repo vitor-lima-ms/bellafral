@@ -13,7 +13,5 @@ def get_total_cost(fralda, stock):
     total_cost = 0
     for cost in costs.values():
         total_cost += cost
-    
-    costs['total_cost'] = round(total_cost, 4)
 
-    return costs
+    return total_cost

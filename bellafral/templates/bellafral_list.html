@@ -1,13 +1,23 @@
 {% extends 'index.html' %}
 
+{% block css %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static "bellafral_list.css" %}">
+{% endblock css %}
+
 {% block content %}
     {% if messages %}
         {% for message in messages %}
             {{ message }}
         {% endfor %}
     {% endif %}
-    {% for fralda in bellafral %}
-        <td><a href="{% url "bellafral:bellafral_details" fralda.id %}">{{ fralda }}</a></td>
-    {% endfor %}
+    <section id="bellafral_list_header">
+        <h2>Lista de Fraldas</h2>
+    </section>
+    <section id="bellafral_list">
+        {% for fralda in bellafral %}
+            <a href="{% url "bellafral:bellafral_details" fralda.id %}">{{ fralda }}</a>
+        {% endfor %}
+    </section>
 {% endblock content %}
 
