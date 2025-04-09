@@ -1,4 +1,4 @@
-#!/home/vitor/Desktop/bellafral/venv/bin/python3
+#!/home/vitor/bellafral/venv/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys
