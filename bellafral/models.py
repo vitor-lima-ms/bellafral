@@ -45,6 +45,34 @@ class Bellafral(models.Model):
 
     total_cost = models.DecimalField(verbose_name='Custo total (R$)', max_digits=10, decimal_places=4, default=0, blank=True, null=True)
 
+    qtd_p_pacote = models.IntegerField(verbose_name='Quantidade de peças por pacote', default=0)
+
+    embalagem = models.DecimalField(verbose_name='Embalagem (R$)', max_digits=10, decimal_places=4, default=0)
+
+    saco_fardos = models.DecimalField(verbose_name='Saco para fardos (R$)', max_digits=10, decimal_places=4, default=0)
+
+    custo_pacote = models.DecimalField(blank=True, null=True, verbose_name='Custo do pacote (R$)', max_digits=10, decimal_places=4, default=0)
+
+    custo_unitario_final = models.DecimalField(blank=True, null=True, verbose_name='Custo unitário final (R$)', max_digits=10, decimal_places=4, default=0)
+
+    comissao = models.DecimalField(verbose_name='Comissão (%)', max_digits=10, decimal_places=4, default=0)
+
+    impostos = models.DecimalField(verbose_name='Impostos (%)', max_digits=10, decimal_places=4, default=0)
+
+    frete = models.DecimalField(verbose_name='Frete (%)', max_digits=10, decimal_places=4, default=0)
+
+    margem_contribuicao = models.DecimalField(verbose_name='Margem de contribuição (%)', max_digits=10, decimal_places=4, default=0)
+
+    st = models.DecimalField(verbose_name='ST (%)', max_digits=10, decimal_places=4, default=0)
+
+    preco_venda = models.DecimalField(blank=True, null=True, verbose_name='Preço de venda (R$)', max_digits=10, decimal_places=4, default=0)
+
+    preco_venda_unitario = models.DecimalField(blank=True, null=True, verbose_name='Preço de venda unitário (R$)', max_digits=10, decimal_places=4, default=0)
+
+    preco_venda_st = models.DecimalField(blank=True, null=True, verbose_name='Preço de venda com ST (R$)', max_digits=10, decimal_places=4, default=0)
+
+    preco_venda_st_unitario = models.DecimalField(blank=True, null=True, verbose_name='Preço de venda unitário com ST (R$)', max_digits=10, decimal_places=4, default=0)
+
     def __str__(self):
         return (f'{self.modelo} {self.identificador} ({self.tamanho})')
 

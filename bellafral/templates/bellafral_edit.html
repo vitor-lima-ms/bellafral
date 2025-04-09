@@ -1,16 +1,16 @@
-{% extends "index.html" %}
+{% extends 'index.html' %}
 
 {% block css %}
     {% load static %}
-    <link rel="stylesheet" href="{% static "costs_base_edit.css" %}">
+    <link rel="stylesheet" href="{% static "bellafral_edit.css" %}">
 {% endblock css %}
 
 {% block content %}
-    <section id="costs_base_edit_header">
-        <h2>Editar custo base</h2>
+    <section id="bellafral_edit_header">
+        <h2>Editar fralda</h2>
     </section>
-    <section id="costs_base_edit_form">
-        <form action="{% url 'costs:costs_base_save' cost.id %}" method="post">
+    <section id="bellafral_edit_form">
+        <form action="{% url 'bellafral:bellafral_edit_save' fralda.id %}" method="post">
             {% csrf_token %}
             <table>
                 {{ form.as_table }}
@@ -22,4 +22,5 @@
             </table>
         </form>
     </section>
-{% endblock %}
+{% endblock content %}
+

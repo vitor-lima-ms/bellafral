@@ -10,3 +10,9 @@ class BellafralForm(forms.ModelForm):
 class BellafralSimulatorForm(forms.Form):
     fralda = forms.ModelChoiceField(queryset=Bellafral.objects.all())
     costs = forms.ModelChoiceField(queryset=Costs.objects.all())
+
+class BellafralEditForm(forms.ModelForm):
+    class Meta:
+        model = Bellafral
+        fields = '__all__'
+

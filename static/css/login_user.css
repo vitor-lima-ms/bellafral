@@ -1,0 +1,40 @@
+#success_message {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1em;
+}
+
+body {
+    background-color: #000;
+}
+
+h3 {
+    font-weight: bold;
+    text-align: center;
+    margin-top: 1em;
+    color: #f8f9fa;
+}
+form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1em;
+    font-size: larger;
+    box-shadow: 0.25em 0.25em 0.25em rgba(0, 0, 0, 0.5);
+    border-radius: 0.5em;
+    color: #f8f9fa;
+}
+table {
+    font-weight: bold;
+    text-align: center;
+}
+table tr {
+    border-radius: 0.25em;
+    border: 0.125em solid #f8f9fa;
+    color: #f8f9fa;
+}
+table td {
+    padding: 0.25em;
+    color: #f8f9fa;
+}

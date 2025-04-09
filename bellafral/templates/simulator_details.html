@@ -76,6 +76,62 @@
                     <td>{{ total_cost }}</td>
                 </tr>
                 <tr>
+                    <td colspan="3"><b>Quantidade de peças por pacote</b></td>
+                    <td>{{ simulation.fralda_object.qtd_p_pacote }}</td>
+                </tr>
+                <tr>
+                    <td colspan="3"><b>Embalagem (R$)</b></td>
+                    <td>{{ simulation.fralda_object.embalagem }}</td>
+                </tr>
+                <tr>
+                    <td colspan="3"><b>Saco para fardos (R$)</b></td>
+                    <td>{{ simulation.fralda_object.saco_fardos }}</td>
+                </tr>
+                <tr>
+                    <td colspan="3"><b>Custo do pacote (R$)</b></td>
+                    <td>{{ simulation.fralda_object.custo_pacote }}</td>
+                </tr>
+                <tr>
+                    <td colspan="3"><b>Custo unitário final (R$)</b></td>
+                    <td>{{ simulation.fralda_object.custo_unitario_final }}</td>
+                </tr>
+                <tr>
+                    <td colspan="3"><b>Comissão (%)</b></td>
+                    <td>{{ simulation.fralda_object.comissao }}</td>
+                </tr>
+                <tr>
+                    <td colspan="3"><b>Impostos (%)</b></td>
+                    <td>{{ simulation.fralda_object.impostos }}</td>
+                </tr>
+                <tr>
+                    <td colspan="3"><b>Frete (%)</b></td>
+                    <td>{{ simulation.fralda_object.frete }}</td>
+                </tr>
+                <tr>
+                    <td colspan="3"><b>Margem de contribuição (%)</b></td>
+                    <td>{{ simulation.fralda_object.margem_contribuicao }}</td>
+                </tr>
+                <tr>
+                    <td colspan="3"><b>ST (%)</b></td>
+                    <td>{{ simulation.fralda_object.st }}</td>
+                </tr>
+                <tr>
+                    <td colspan="3"><b>Preço de venda (R$)</b></td>
+                    <td>{{ simulation.fralda_object.preco_venda }}</td>
+                </tr>
+                <tr>
+                    <td colspan="3"><b>Preço de venda unitário (R$)</b></td>
+                    <td>{{ simulation.fralda_object.preco_venda_unitario }}</td>
+                </tr>
+                <tr>
+                    <td colspan="3"><b>Preço de venda com ST (R$)</b></td>
+                    <td>{{ simulation.fralda_object.preco_venda_st }}</td>
+                </tr>
+                <tr>
+                    <td colspan="3"><b>Preço de venda unitário com ST (R$)</b></td>
+                    <td>{{ simulation.fralda_object.preco_venda_st_unitario }}</td>
+                </tr>
+                <tr>
                     <td colspan="4">
                         <form action="{% url 'bellafral:simulator_delete' simulation.id %}" method="post">
                             {% csrf_token %}

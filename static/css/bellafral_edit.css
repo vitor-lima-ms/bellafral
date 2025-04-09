@@ -1,4 +1,4 @@
-#bellafral_details_header {
+#bellafral_edit_header {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -14,13 +14,18 @@ h2 {
     color: #000;
 }
 
-#bellafral_details_table {
+#bellafral_edit_form {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-top: 2em;
     margin-bottom: 2em;
     color: #f8f9fa;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
 }
 
 table {
@@ -33,7 +38,7 @@ table tr {
 
 table tr td {
     padding: 0.5em;
-    text-align: left;
+    text-align: right;
     font-weight: bold;
 }
 

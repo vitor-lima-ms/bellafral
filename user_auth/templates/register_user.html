@@ -1,0 +1,102 @@
+{% extends "index.html" %}
+
+{% block css %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'register_user.css' %}">
+{% endblock css %}
+
+{% block content %}
+    <section id="register_user_header">
+        <h2>Registrar usuário</h2>
+    </section>
+    <form action="{% url "user_auth:register_user" %}" method="post">
+        {% csrf_token %}
+        <table>
+            <tbody>
+                <tr>
+                    <td>
+                        Nome<br>
+                    </td>
+                    <td>
+                        {{ form.first_name }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        Sobrenome<br>
+                    </td>
+                     <td>
+                        {{ form.last_name }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        E-mail<br>
+                    </td>
+                    <td>
+                        {{ form.email }}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        {{ form.username.label }}<br>
+                    </td>
+                    <td>
+                        {{ form.username }}
+                    </td>
+                    <td>
+                        <ul>
+                            <li><h6>Obrigatório</h6></li>
+                            <li><h6>150 caracteres ou menos</h6></li>
+                            <li><h6>Letras, números e @/./+/-/_ apenas</h6></li>
+                        </ul>
+                    </td>   
+                </tr>
+                <tr>
+                    <td>
+                        {{ form.password1.label }}
+                    </td>
+                    <td>
+                        {{ form.password1 }}
+                    </td>
+                    <td>
+                        <ul>
+                            <li><h6>Sua senha não pode ser muito parecida com o resto das suas informações pessoais</h6></li>
+                            <li><h6>Sua senha deve conter pelo menos 8 caracteres</h6></li>
+                            <li><h6>Sua senha não pode ser uma senha comum</h6></li>
+                            <li><h6>Sua senha não pode ser inteiramente numérica</h6></li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        {{ form.password2.label }}
+                    </td>
+                    <td>
+                        {{ form.password2 }}
+                    </td>
+                    <td>
+                        <ul>
+                            <li><h6>Digite a mesma senha que antes, para verificação</h6></li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="3">
+                        <button type="submit">Registrar</button>
+                    </td>
+                </tr>
+                {% if form.errors %}
+                    <tr>
+                        <td colspan="3">                        
+                                <p>Erro ao registrar usuário. Por favor, tente novamente.</p>
+                                {{ form.username.errors }}
+                                {{ form.password1.errors }}
+                                {{ form.password2.errors }}
+                        </td>
+                    </tr>
+                {% endif %}
+            </tbody>
+        </table>
+    </form>
+{% endblock content %}

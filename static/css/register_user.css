@@ -1,9 +1,8 @@
-#bellafral_details_header {
+#register_user_header {
     display: flex;
     justify-content: center;
     align-items: center;
 }
-
 h2 {
     margin-top: 1em;
     width: fit-content;
@@ -13,32 +12,32 @@ h2 {
     background-color: #f8f9fa;
     color: #000;
 }
-
-#bellafral_details_table {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 2em;
-    margin-bottom: 2em;
-    color: #f8f9fa;
+form {
+    padding: 1em;
+    margin: 1em;
+    background-color: #f8f9fa;
+    font-size: larger;
+    border-radius: 0.5em;
+    color: #000;
 }
-
 table {
-    border-collapse: collapse;
-}
-
-table tr {
-    border: 1px solid #f8f9fa;
-}
-
-table tr td {
-    padding: 0.5em;
-    text-align: left;
     font-weight: bold;
+    text-align: center;
 }
-
+table tr, table td {
+    border-radius: 0.25em;
+    border: 2px solid #000;
+}
+table td {
+    padding: 4px;
+}
+ul li {
+    text-align: left;
+}
+ul li h6 {
+    margin: 0;
+}
 button {
-    width: 100%;
     border-radius: 0.5em;
     background-color: #f8f9fa;
     color: #000;

@@ -12,6 +12,10 @@ urlpatterns = [
 
     path('bellafral_delete/<int:id>', views.bellafral_delete, name='bellafral_delete'),
 
+    path('bellafral_edit/<int:id>', views.bellafral_edit, name='bellafral_edit'),
+
+    path('bellafral_edit_save/<int:id>', views.bellafral_edit_save, name='bellafral_edit_save'),
+
     path('bellafral_pre_simulator', views.bellafral_pre_simulator, name='bellafral_pre_simulator'),
 
     path('bellafral_simulator', views.bellafral_simulator, name='bellafral_simulator'),

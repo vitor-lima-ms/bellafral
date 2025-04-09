@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'core',
     'bellafral',
     'costs',
+    'user_auth',
     'import_export',
 ]
 

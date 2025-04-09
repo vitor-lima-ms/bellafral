@@ -7,7 +7,7 @@
 
 {% block content %}
     <section id="bellafral_details_header">
-        <h2>Detalhes da Bellafral</h2>
+        <h2>Detalhes da fralda</h2>
     </section>
     <section id="bellafral_details_table">
         <table>
@@ -52,10 +52,48 @@
                 <td>{{ fralda.hot_melt_const }}</td>
             </tr>
             <tr>
-                <td colspan="2">
+                <td>Quantidade de peças por pacote:</td>
+                <td>{{ fralda.qtd_p_pacote }}</td>
+            </tr>
+            <tr>
+                <td>Embalagem (R$):</td>
+                <td>{{ fralda.embalagem }}</td>
+            </tr>
+            <tr>
+                <td>Saco para fardos (R$):</td>
+                <td>{{ fralda.saco_fardos }}</td>
+            </tr>
+            <tr>
+                <td>Comissão (%):</td>
+                <td>{{ fralda.comissao }}</td>
+            </tr>
+            <tr>
+                <td>Impostos (%):</td>
+                <td>{{ fralda.impostos }}</td>
+            </tr>
+            <tr>
+                <td>Frete (%):</td>
+                <td>{{ fralda.frete }}</td>
+            </tr>
+            <tr>
+                <td>Margem de contribuição (%):</td>
+                <td>{{ fralda.margem_contribuicao }}</td>
+            </tr>
+            <tr>
+                <td>ST (%):</td>
+                <td>{{ fralda.st }}</td>
+            </tr>
+            <tr>
+                <td>
                     <form action="{% url 'bellafral:bellafral_delete' fralda.id %}" method="post">
                         {% csrf_token %}
                         <button type="submit">Deletar</button>
+                    </form>
+                </td>
+                <td>
+                    <form action="{% url 'bellafral:bellafral_edit' fralda.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit">Editar</button>
                     </form>
                 </td>
             </tr>

@@ -33,7 +33,7 @@ def costs_form(request):
                     return redirect('costs:costs_form')
             
             form.save()
-            messages.success(request, 'Custos criados com sucesso')
+            messages.success(request, 'Custo criado com sucesso')
             return redirect('costs:costs_list')
     else:
         form = CostsForm()

@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
 from django.contrib import messages
-from bellafral.my_forms import BellafralForm, BellafralSimulatorForm
+from bellafral.my_forms import BellafralForm, BellafralSimulatorForm, BellafralEditForm
 from bellafral.models import Bellafral, Simulations
 from base_dir.functions import get_total_cost
 import csv
@@ -38,6 +38,18 @@ def bellafral_delete(request, id):
     fralda.delete()
     return redirect('bellafral:bellafral_list')
 
+def bellafral_edit(request, id):
+    fralda = get_object_or_404(Bellafral, id=id)
+    form = BellafralEditForm(instance=fralda)
+    return render(request, 'bellafral_edit.html', {'form': form, 'fralda': fralda})
+
+def bellafral_edit_save(request, id):
+    fralda = get_object_or_404(Bellafral, id=id)
+    form = BellafralEditForm(request.POST, instance=fralda)
+    if form.is_valid():
+        form.save()
+        return redirect('bellafral:bellafral_details', id=id)
+
 def bellafral_pre_simulator(request):
     form = BellafralSimulatorForm()
     return render(request, 'bellafral_pre_simulator.html', {'form': form})
@@ -69,6 +81,15 @@ def bellafral_simulator(request):
     fralda.barreira_total_unit_cost = round(fralda.barreira * costs.barreira_price, 4)
     fralda.polietileno_filme_780_total_unit_cost = round(fralda.polietileno_filme_780 * costs.polietileno_filme_780_price, 4)
     fralda.hot_melt_const_total_unit_cost = round(fralda.hot_melt_const * costs.hot_melt_const_price, 4)
+
+    fralda.custo_pacote = round((total_cost * fralda.qtd_p_pacote) + fralda.embalagem + fralda.saco_fardos, 4)
+    fralda.custo_unitario_final = round(fralda.custo_pacote / fralda.qtd_p_pacote, 4)
+
+    fralda.preco_venda = round((fralda.custo_pacote) / (1 - (fralda.comissao + fralda.impostos + fralda.frete + fralda.margem_contribuicao + fralda.st) / 100), 4)
+    fralda.preco_venda_unitario = round(fralda.preco_venda / fralda.qtd_p_pacote, 4)
+
+    fralda.preco_venda_st = round(fralda.preco_venda * (1 + fralda.st / 100), 4)
+    fralda.preco_venda_st_unitario = round(fralda.preco_venda_st / fralda.qtd_p_pacote, 4)
 
     fralda.save()
     
@@ -170,7 +191,105 @@ def download_simulation(request, id):
             total_cost,
         ]
     )
-    
+
+    csv_writer.writerow(
+        [
+            'Quantidade de peças por pacote',
+            simulation.fralda_object.qtd_p_pacote,
+        ]
+    )
+
+    csv_writer.writerow(
+        [
+            'Embalagem (R$)',
+            simulation.fralda_object.embalagem,
+        ]
+    )
+
+    csv_writer.writerow(
+        [
+            'Saco para fardos (R$)',
+            simulation.fralda_object.saco_fardos,
+        ]
+    )
+
+    csv_writer.writerow(
+        [
+            'Custo do pacote (R$)',
+            simulation.fralda_object.custo_pacote,
+        ]
+    )
+
+    csv_writer.writerow(
+        [
+            'Custo unitário final (R$)',
+            simulation.fralda_object.custo_unitario_final,
+        ]
+    )
+
+    csv_writer.writerow(
+        [
+            'Comissão (%)',
+            simulation.fralda_object.comissao,
+        ]
+    )
+
+    csv_writer.writerow(
+        [
+            'Impostos (%)',
+            simulation.fralda_object.impostos,
+        ]
+    )
+
+    csv_writer.writerow(
+        [
+            'Frete (%)',
+            simulation.fralda_object.frete,
+        ]
+    )
+
+    csv_writer.writerow(
+        [
+            'Margem de contribuição (%)',
+            simulation.fralda_object.margem_contribuicao,
+        ]
+    )
+
+    csv_writer.writerow(
+        [
+            'ST (%)',
+            simulation.fralda_object.st,
+        ]
+    )
+
+    csv_writer.writerow(
+        [
+            'Preço de venda (R$)',
+            simulation.fralda_object.preco_venda,
+        ]
+    )
+
+    csv_writer.writerow(
+        [
+            'Preço de venda unitário (R$)',
+            simulation.fralda_object.preco_venda_unitario,
+        ]
+    )
+
+    csv_writer.writerow(
+        [
+            'Preço de venda com ST (R$)',
+            simulation.fralda_object.preco_venda_st,
+        ]
+    )
+
+    csv_writer.writerow(
+        [
+            'Preço de venda unitário com ST (R$)',
+            simulation.fralda_object.preco_venda_st_unitario,
+        ]
+    )
+
     return response
 
 def simulator_list(request):
