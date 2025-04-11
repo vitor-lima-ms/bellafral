@@ -28,9 +28,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-+2u=r31b36y5zsfga_w0rrxklvlu%d(h4@r(@6*#tb%u+ab@a+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
+    'https://bellafralcustos.com'
     'bellafral-production.up.railway.app',
     'https://bellafral-production.up.railway.app',
     '*',
