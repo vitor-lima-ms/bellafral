@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect, get_list_or_404, get_object_or_404
-from bellafral.models import Simulations
-from bellafral.my_forms import SimulationEditForm
+from bellafral.models import Simulations, Bellafral
+from bellafral.my_forms import BellafralEditForm
 from base_dir.functions import get_total_cost
 
 # Create your views here.
@@ -8,7 +8,7 @@ from base_dir.functions import get_total_cost
 def index(request):
     try:
         simulations = get_list_or_404(Simulations)
-
+        
         simulations_list = []
         for simulation in simulations:
             total_cost = get_total_cost(simulation.fralda_object, simulation.costs_object)
@@ -37,20 +37,23 @@ def index(request):
             simulation.save()
             
             simulations_list.append(simulation)
-
+        
         return render(request, 'index.html', {'simulations': simulations_list})
     
     except:
+        print('Entrou no except')
         return render(request, 'index.html', {'simulations': []})
 
 def simulator_edit(request, id):
     simulation = get_object_or_404(Simulations, id=id)
-    form = SimulationEditForm(instance=simulation)
-    return render(request, 'simulator_edit.html', {'simulation': simulation, 'form': form})
+    fralda = get_object_or_404(Bellafral, id=simulation.fralda_object.id)
+    form = BellafralEditForm(instance=fralda)
+    return render(request, 'simulator_edit.html', {'simulation': simulation, 'fralda': fralda, 'form': form})
 
 def simulator_save(request, id):
     simulation = get_object_or_404(Simulations, id=id)
-    form = SimulationEditForm(request.POST, instance=simulation)
+    fralda = get_object_or_404(Bellafral, id=simulation.fralda_object.id)
+    form = BellafralEditForm(request.POST, instance=fralda)
     if form.is_valid():
         form.save()
     

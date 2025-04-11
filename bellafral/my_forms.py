@@ -34,7 +34,13 @@ class BellafralEditForm(forms.ModelForm):
         ]
 
 
-class SimulationEditForm(forms.ModelForm):
+class BellafralEditForm(forms.ModelForm):
     class Meta:
-        model = Simulations
-        fields = '__all__'
+        model = Bellafral
+        fields = [
+            'comissao',
+            'impostos',
+            'frete',
+            'margem_contribuicao',
+            'st',
+        ]

@@ -2,7 +2,7 @@
 
 {% block css %}
     {% load static %}
-    <link rel="stylesheet" href="{% static "simulator_details.css" %}">
+    <link rel="stylesheet" href="{% static "simulator_edit.css" %}">
 {% endblock css %}
 
 {% block content %}
@@ -10,10 +10,18 @@
         <h2>Simulação - {{ simulation }}</h2>
     </section>
     <section id="simulator_edit_table">
-        <form action="{% url 'core:simulator_save' simulation.id %}" method="post">
+        <form action="{% url 'core:simulator_save' fralda.id %}" method="post">
             {% csrf_token %}
-            {{ form.as_table }}
-            <button type="submit">Salvar</button>
+            <table>
+                <tr>
+                    {{ form.as_table }}
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <button type="submit">Salvar</button>
+                    </td>
+                </tr>
+            </table>
         </form>
     </section>
 {% endblock content %}

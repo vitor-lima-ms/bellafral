@@ -15,9 +15,6 @@ h2 {
 }
 
 #simulator_edit_table {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     margin-top: 2em;
     margin-bottom: 2em;
     color: #f8f9fa;
