@@ -36,7 +36,6 @@ ALLOWED_HOSTS = [
 ]
 
 CRSF_TRUSTED_ORIGINS = [
-    'bellafral-production.up.railway.app',
     'https://bellafral-production.up.railway.app',
 ]
 
