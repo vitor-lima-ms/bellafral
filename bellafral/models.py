@@ -16,7 +16,7 @@ tamanhos = (
 
 class Bellafral(models.Model):
     modelo = models.CharField(max_length=100, choices=modelos, default='Bellafral')
-    identificador = models.CharField(max_length=100)
+    identificador = models.CharField(verbose_name='Identificador', max_length=100)
     tamanho = models.CharField(max_length=2, choices=tamanhos)
     
     celulose_virgem = models.DecimalField(verbose_name='Celulose virgem (Kg)', max_digits=10, decimal_places=4, default=0)

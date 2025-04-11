@@ -34,7 +34,7 @@ class BellafralEditForm(forms.ModelForm):
         ]
 
 
-class BellafralEditForm(forms.ModelForm):
+class SimulationEditForm(forms.ModelForm):
     class Meta:
         model = Bellafral
         fields = [

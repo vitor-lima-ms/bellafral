@@ -4,7 +4,7 @@
     align-items: center;
 }
 
-h2 {
+h3 {
     margin-top: 1em;
     width: fit-content;
     padding: 0.5em;
@@ -28,7 +28,7 @@ table {
 }
 
 table th {
-    text-align: center;
+    text-align: left;
     width: 10em;
 }
 
