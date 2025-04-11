@@ -28,9 +28,11 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-+2u=r31b36y5zsfga_w0rrxklvlu%d(h4@r(@6*#tb%u+ab@a+'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ['*']
+
+CRSF_TRUSTED_ORIGINS = ['*']
 
 
 # Application definition
@@ -47,6 +49,7 @@ INSTALLED_APPS = [
     'costs',
     'user_auth',
     'import_export',
+    'whitenoise.runserver_nostatic',
 ]
 
 MIDDLEWARE = [
@@ -135,6 +138,10 @@ STATICFILES_DIRS = [
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATIC_URL = 'static/'
 
+# Whitenoise
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# Media
 MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = '/media/'
 
