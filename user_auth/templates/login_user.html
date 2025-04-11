@@ -5,6 +5,15 @@
 {% endblock css %}
 
 {% block content %}
+    {% if messages %}
+        {% for message in messages %}
+            <section id="success_message">
+                <div class="alert alert-light" role="alert">
+                    {{ message }}
+                </div>
+            </section>
+        {% endfor %}
+    {% endif %}
     <h3>Bellafral - Sistema de Simulação de Custos</h3>    
     <form action="{% url "user_auth:login_user" %}" method="post">
         {% csrf_token %}
