@@ -1,12 +1,13 @@
-from django.shortcuts import render, get_list_or_404
+from django.shortcuts import render, redirect, get_list_or_404, get_object_or_404
 from bellafral.models import Simulations
+from bellafral.my_forms import SimulationEditForm
 from base_dir.functions import get_total_cost
+
 # Create your views here.
 
 def index(request):
     try:
         simulations = get_list_or_404(Simulations)
-        print(simulations)
 
         simulations_list = []
         for simulation in simulations:
@@ -41,3 +42,17 @@ def index(request):
     
     except:
         return render(request, 'index.html', {'simulations': []})
+
+def simulator_edit(request, id):
+    simulation = get_object_or_404(Simulations, id=id)
+    form = SimulationEditForm(instance=simulation)
+    return render(request, 'simulator_edit.html', {'simulation': simulation, 'form': form})
+
+def simulator_save(request, id):
+    simulation = get_object_or_404(Simulations, id=id)
+    form = SimulationEditForm(request.POST, instance=simulation)
+    if form.is_valid():
+        form.save()
+    
+    return redirect('core:index')
+    

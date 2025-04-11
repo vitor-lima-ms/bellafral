@@ -1,0 +1,19 @@
+{% extends "index.html" %}
+
+{% block css %}
+    {% load static %}
+    <link rel="stylesheet" href="{% static "simulator_details.css" %}">
+{% endblock css %}
+
+{% block content %}
+    <section id="simulator_edit_header">
+        <h2>Simulação - {{ simulation }}</h2>
+    </section>
+    <section id="simulator_edit_table">
+        <form action="{% url 'core:simulator_save' simulation.id %}" method="post">
+            {% csrf_token %}
+            {{ form.as_table }}
+            <button type="submit">Salvar</button>
+        </form>
+    </section>
+{% endblock content %}

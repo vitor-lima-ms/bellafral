@@ -1,5 +1,5 @@
 from django import forms
-from bellafral.models import Bellafral
+from bellafral.models import Bellafral, Simulations
 from costs.models import Costs
 
 class BellafralForm(forms.ModelForm):
@@ -33,3 +33,8 @@ class BellafralEditForm(forms.ModelForm):
             'st',
         ]
 
+
+class SimulationEditForm(forms.ModelForm):
+    class Meta:
+        model = Simulations
+        fields = '__all__'

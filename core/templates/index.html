@@ -204,10 +204,16 @@
                                     <td>{{ simulation.fralda_object.preco_venda_st_unitario }}</td>
                                 </tr>
                                 <tr>
-                                    <td colspan="4">
+                                    <td colspan="2">
                                         <form action="{% url 'bellafral:simulator_delete' simulation.id %}" method="post">
                                             {% csrf_token %}
                                             <button type="submit">Deletar</button>
+                                        </form>
+                                    </td>
+                                    <td colspan="2">
+                                        <form action="{% url 'core:simulator_edit' simulation.id %}" method="post">
+                                            {% csrf_token %}
+                                            <button type="submit">Editar</button>
                                         </form>
                                     </td>
                                 </tr>
