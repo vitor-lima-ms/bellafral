@@ -1,5 +1,5 @@
 from django import forms
-from bellafral.models import Bellafral, Simulations
+from bellafral.models import Bellafral
 from costs.models import Costs
 
 class BellafralForm(forms.ModelForm):
