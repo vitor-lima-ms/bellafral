@@ -41,7 +41,6 @@ def index(request):
         return render(request, 'index.html', {'simulations': simulations_list})
     
     except:
-        print('Entrou no except')
         return render(request, 'index.html', {'simulations': []})
 
 def simulator_edit(request, id):
@@ -57,5 +56,5 @@ def simulator_save(request, id):
     if form.is_valid():
         form.save()
     
-    return redirect('core:index')
+    return redirect('bellafral:simulator_details', id=id)
     
