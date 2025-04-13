@@ -45,6 +45,10 @@ class Bellafral(models.Model):
 
     total_cost = models.DecimalField(verbose_name='Custo total (R$)', max_digits=10, decimal_places=4, default=0, blank=True, null=True)
 
+    loss_percentage = models.DecimalField(verbose_name='Perdas (%)', max_digits=10, decimal_places=4, default=0)
+
+    total_cost_with_loss = models.DecimalField(verbose_name='Custo total com perdas (R$)', max_digits=10, decimal_places=4, default=0, blank=True, null=True)
+
     qtd_p_pacote = models.IntegerField(verbose_name='Quantidade de peças por pacote', default=0)
 
     embalagem = models.DecimalField(verbose_name='Embalagem (R$)', max_digits=10, decimal_places=4, default=0)

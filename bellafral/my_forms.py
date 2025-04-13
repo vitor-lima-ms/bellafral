@@ -38,6 +38,7 @@ class SimulationEditForm(forms.ModelForm):
     class Meta:
         model = Bellafral
         fields = [
+            'loss_percentage',
             'comissao',
             'impostos',
             'frete',

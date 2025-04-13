@@ -144,8 +144,16 @@
                                     <td>R$ {{ simulation.fralda_object.hot_melt_const_total_unit_cost }}</td>
                                 </tr>
                                 <tr>
-                                    <td colspan="3"><b>Custo total (R$)</b></td>
+                                    <td colspan="3"><b>Custo total s/ perdas (R$)</b></td>
                                     <td>{{ simulation.fralda_object.total_cost }}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3"><b>Perdas (%)</b></td>
+                                    <td>{{ simulation.fralda_object.loss_percentage }}</td>
+                                </tr>
+                                <tr>
+                                    <td colspan="3"><b>Custo total com perdas (R$)</b></td>
+                                    <td>{{ simulation.fralda_object.total_cost_with_loss }}</td>
                                 </tr>
                                 <tr>
                                     <td colspan="3"><b>Quantidade de peças por pacote</b></td>
